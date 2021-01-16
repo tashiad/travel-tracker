@@ -2,22 +2,18 @@ import chai from 'chai';
 const expect = chai.expect;
 import Traveler from '../src/Traveler'
 import travelerData from '../src/data/Traveler-data'
-import Trip from '../src/Trip'
-import tripData from '../src/data/Trip-data'
 
 describe('Traveler', function() {
   let traveler1
   let traveler1Info
   let traveler2
   let traveler2Info
-  let tripList
 
   beforeEach(function() {
     traveler1Info = travelerData[0]
     traveler1 = new Traveler(traveler1Info)
     traveler2Info = travelerData[1]
     traveler2 = new Traveler(traveler2Info)
-    tripList = tripData
   })
 
   it('should be a function', function() {
