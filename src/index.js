@@ -59,6 +59,7 @@ function matchTripDestinations(destinationData) {
       }
     })
   })
+  domUpdates.displayTotalSpent(currentTraveler)
 }
 
 function createTripCards() {
