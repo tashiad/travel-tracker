@@ -1,15 +1,23 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Traveler from '../src/Traveler'
-import data from '../src/data/Traveler-data'
+import travelerData from '../src/data/Traveler-data'
+import Trip from '../src/Trip'
+import tripData from '../src/data/Trip-data'
 
 describe('Traveler', function() {
-  let traveler
-  let travelerInfo
+  let traveler1
+  let traveler1Info
+  let traveler2
+  let traveler2Info
+  let tripList
 
   beforeEach(function() {
-    travelerInfo = data[0]
-    traveler = new Traveler(travelerInfo)
+    traveler1Info = travelerData[0]
+    traveler1 = new Traveler(traveler1Info)
+    traveler2Info = travelerData[1]
+    traveler2 = new Traveler(traveler2Info)
+    tripList = tripData
   })
 
   it('should be a function', function() {
@@ -17,19 +25,23 @@ describe('Traveler', function() {
   })
 
   it('should have an id', function() {
-    expect(traveler.id).to.eq(1)
+    expect(traveler1.id).to.eq(1)
+    expect(traveler2.id).to.eq(2)
   })
 
   it('should have a name', function() {
-    expect(traveler.name).to.eq('Ham Leadbeater')
+    expect(traveler1.name).to.eq('Ham Leadbeater')
+    expect(traveler2.name).to.eq('Rachael Vaughten')
   })
 
   it('should have a type', function() {
-    expect(traveler.type).to.eq('relaxer')
+    expect(traveler1.type).to.eq('relaxer')
+    expect(traveler2.type).to.eq('thrill-seeker')
   })
 
   it('should start out with an empty array of trips', function() {
-    expect(traveler.trips).to.deep.equal([])
+    expect(traveler1.trips).to.deep.equal([])
+    expect(traveler2.trips).to.deep.equal([])
   })
 
 })
