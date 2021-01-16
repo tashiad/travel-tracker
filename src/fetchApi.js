@@ -1,23 +1,34 @@
 const fetchApi = {
+  getTravelerData() {
+    return fetch('http://localhost:3001/api/v1/travelers')
+      .then(response => response.json())
+  },
 
-  apiTest() {
-    console.log('fetch api file')
+  getSingleTraveler(travelerId) {
+    return fetch(`http://localhost:3001/api/v1/travelers/${travelerId}`)
+      .then(response => response.json())
+  },
+
+  getTripData() {
+    return fetch('http://localhost:3001/api/v1/trips')
+      .then(response => response.json())
+  },
+
+  getDestinationData() {
+    return fetch('http://localhost:3001/api/v1/destinations	')
+      .then(response => response.json())
+  },
+
+  postTripRequest(tripRequest) {
+    const postFormat = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(tripRequest)
+    }
+
+    return fetch('http://localhost:3001/api/v1/trips', postFormat)
+      .then(response => response.json())
   }
-  // getUserData() {
-  //   return fetch('http://localhost:3001/api/v1/users')
-  //     .then(response => response.json())
-  // },
-  //
-  // postUserInformation(updatedPantryItem) {
-  //   const postFormat = {
-  //     method: 'POST',
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: JSON.stringify(updatedPantryItem)
-  //   }
-  //
-  //   return fetch('http://localhost:3001/api/v1/users', postFormat)
-  //     .then(response => response.json())
-  // }
 }
 
 export default fetchApi
