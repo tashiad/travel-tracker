@@ -1,15 +1,102 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>COVID's Over Travel Tracker</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <h1>Webpack Starter Kit</h1>
-    <p>Test Commit!</p>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
 
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>COVID's Over Travel Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/fd3b3feed2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
+  </header>
+  <main>
+    <aside class="sidebar">
+      <h3>Plan A New Trip</h3>
+      <form class="trip-form" action="index.html" method="post">
+        <input id="trip-id" name="trip-id" type="hidden" value="xm234jq">
+        <input id="user-id" name="user-id" type="hidden" value="xm234jq">
+        <label for="trip-start">Start Date:</label>
+        <input type="date" id="trip-start" name="trip-start" value="2021-01-01" required>
+        <label for="trip-duration">Number of Days:</label>
+        <input type="number" id="trip-duration" name="trip-duration" min="1" required>
+        <label for="trip-travelers">Number of Travelers:</label>
+        <input type="number" id="trip-travelers" name="trip-travelers" min="1" required>
+        <label for="trip-destination">Destination:</label>
+        <select id="trip-destination" name="trip-destination" required>
+          <option selected>Lima, Peru</option>
+          <option>Stockholm, Sweden</option>
+          <option>Sydney, Austrailia</option>
+          <option>Cartagena, Colombia</option>
+          <option>Madrid, Spain</option>
+        </select>
+        <input id="trip-status" name="trip-status" type="hidden" value="pending">
+        <input id="suggested-activities" name="suggested-activities" type="hidden" value="xm234jq">
+        <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
+        <p><strong>Estimated Trip Cost:</strong> $1,467</p>
+        <input class="button button-submit" id="button-submit" type="submit" value="Submit Trip Request">
+      </form>
+    </aside>
+    <section class="all-trips">
+      <h2>Welcome, Leila! Here are your trips.</h2>
+      <h4>Total amount spent on trips this year: $3,578</h4>
+      <section class="card-grid">
+        <article class="card">
+          <h4>Lima, Peru</h4>
+          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
+          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
+          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
+          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
+          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
+          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
+          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
+        </article>
+        <article class="card">
+          <h4>Lima, Peru</h4>
+          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
+          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
+          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
+          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
+          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
+          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
+          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
+        </article>
+        <article class="card">
+          <h4>Lima, Peru</h4>
+          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
+          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
+          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
+          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
+          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
+          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
+          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
+        </article>
+        <article class="card">
+          <h4>Lima, Peru</h4>
+          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
+          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
+          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
+          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
+          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
+          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
+          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
+        </article>
+        <article class="card">
+          <h4>Lima, Peru</h4>
+          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
+          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
+          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
+          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
+          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
+          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
+          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
+        </article>
+      </section>
+    </section>
+  </main>
+</body>
+
 </html>

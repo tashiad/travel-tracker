@@ -1,0 +1,31 @@
+.trip-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 5%;
+}
+
+.button {
+  margin-top: 8%;
+  margin-bottom: 8%;
+  height: 40px;
+}
+
+.button-quote {
+  border: 1px solid $dark-purple;
+  border-radius: 3px;
+  font-size: 1em;
+
+  &:hover {
+    box-shadow: $button-hover;
+    transition: .5s ease;
+  }
+}
+
+.button-submit {
+  @extend .button-quote;
+  color: white;
+  background-color: $dark-purple;
+}
