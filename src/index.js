@@ -17,6 +17,7 @@ const buttonSubmit = document.querySelector("#button-submit")
 
 // GLOBAL VARIABLES
 let currentTraveler
+// const travelerTripDestinations = []
 
 // FETCH API DATASETS
 const fetchedTravelerData = fetchApi.getTravelerData()
@@ -26,8 +27,8 @@ const fetchedDestinationData = fetchApi.getDestinationData()
 Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
   .then(values => {
     generateTraveler(values[0])
-    // createRecipeDataset(values[1])
-    // addRecipeNameAndCost(values[2])
+    findTrips(values[1])
+    // generateDestinations(values[2])
     // loadWebsite()
   }).catch(handleErrorMessages)
 
@@ -36,7 +37,7 @@ Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
 // }
 
 function handleErrorMessages(error) {
-  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  // window.alert('The server was not accessible at this time. Please reload the page or try again later.')
   console.log(error)
 }
 
@@ -45,12 +46,33 @@ function generateTraveler(travelerData) {
   currentTraveler = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)])
   let firstName = currentTraveler.name.split(' ')[0]
   domUpdates.addWelcomeMessage(firstName)
+  // findTravelerTrips(currentTraveler.id)
 }
 
-// function findRecipe(recipeID) {
-//   return allRecipes.find(recipe => recipe.id === Number(recipeID))
+function findTrips(tripData) {
+  tripData.trips.forEach(trip => {
+    let travelerTrip = new Trip(trip)
+    if (travelerTrip.userId === currentTraveler.id) {
+      currentTraveler.trips.push(travelerTrip)
+    }
+  })
+}
+
+// function generateDestinations(destinationData) {
+//   destinationData.destinations.forEach(destination => {
+//     let tripDestination = new Destination(destination)
+//     if (trip.userID === currentTraveler.id) {
+//       travelerTrips.push(trip)
+//     }
+//   })
+//   console.log(travelerTrips);
 // }
-//
+
+// function findTravelerTrips(travelerId) {
+//   travelerTrips = fetchedTripData.trips.filter(trip => trip.userID === travelerId)
+//   console.log(travelerTrips)
+// }
+
 // function createTripCards() {
 //   fetchedTripData.forEach(trip => {
 //     domUpdates.addCardToDom(trip)

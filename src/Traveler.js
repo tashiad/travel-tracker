@@ -5,6 +5,7 @@ class Traveler {
     this.type = traveler.travelerType
     this.trips = []
   }
+
 }
 
 module.exports = Traveler
