@@ -41,59 +41,21 @@
       </form>
     </aside>
     <section class="all-trips">
-      <h2>Welcome, Leila! Here are your trips.</h2>
+      <h2 id="welcome-text">Welcome, Traveler! Here are your trips.</h2>
       <h4>Total amount spent on trips this year: $3,578</h4>
       <section class="card-grid">
-        <article class="card">
-          <h4>Lima, Peru</h4>
-          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
-          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
-          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
-          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
-          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
-          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
-          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
-        </article>
-        <article class="card">
-          <h4>Lima, Peru</h4>
-          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
-          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
-          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
-          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
-          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
-          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
-          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
-        </article>
-        <article class="card">
-          <h4>Lima, Peru</h4>
-          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
-          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
-          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
-          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
-          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
-          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
-          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
-        </article>
-        <article class="card">
-          <h4>Lima, Peru</h4>
-          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
-          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
-          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
-          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
-          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
-          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
-          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
-        </article>
-        <article class="card">
-          <h4>Lima, Peru</h4>
-          <img class="card-image" src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80" alt="overview of city buildings with a clear sky">
-          <p class="card-travelers"><strong>Travelers:</strong> 5</p>
-          <p class="card-date"><strong>Start Date:</strong> 12/14/2020</p>
-          <p class="card-duration"><strong>Duration:</strong> 9 days</p>
-          <p class="card-lodging"><strong>Lodging:</strong> $143 per night</p>
-          <p class="card-flights"><strong>Flights:</strong> $376 per person</p>
-          <p class="card-status"><strong>Status:</strong> <span class="pending">pending</span></p>
-        </article>
+        <template class="template-card">
+          <article class="card">
+            <h4 class="card-destination"></h4>
+            <img class="card-image" src="source" alt="alt-text">
+            <p class="card-travelers"></p>
+            <p class="card-date"></p>
+            <p class="card-duration"></p>
+            <p class="card-lodging"></p>
+            <p class="card-flights"></p>
+            <p class="card-status"></p>
+          </article>
+        </template>
       </section>
     </section>
   </main>
