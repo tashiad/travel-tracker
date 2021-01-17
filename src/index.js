@@ -46,7 +46,14 @@ function findTravelerTrips(tripData) {
   })
 }
 
+function alphabetizeDestinations(destinationData) {
+  destinationData.destinations.sort((a, b) => {
+    return a.destination.localeCompare(b.destination)
+  })
+}
+
 function generateTripDestinations(destinationData) {
+  alphabetizeDestinations(destinationData)
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
     domUpdates.addDestinationsToDropdown(newDestination)

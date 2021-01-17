@@ -16,6 +16,7 @@ const domUpdates = {
   addDestinationsToDropdown(destination) {
     const newOption = document.createElement('option')
     newOption.innerText = destination.name
+    newOption.value = destination.name
     destinationDropdown.appendChild(newOption)
   },
 
