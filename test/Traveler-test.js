@@ -13,25 +13,17 @@ describe('Traveler', function() {
   let traveler2
   let traveler2Info
 
-  function matchTrips(traveler) {
+  function findTravelerTrips(traveler) {
     tripData.forEach(trip => {
-      let travelerTrip = new Trip(trip)
-
-      if (travelerTrip.userId === traveler.id) {
-        traveler.trips.push(travelerTrip)
-      }
+      let newTrip = new Trip(trip)
+      traveler.addMatchingTrips(newTrip)
     })
   }
 
-  function matchDestinations(traveler) {
+  function matchTripDestinations(traveler) {
     destinationData.forEach(location => {
-      let tripDestination = new Destination(location)
-
-      traveler.trips.forEach(trip => {
-        if (trip.destinationId === tripDestination.id) {
-          trip.destinationDetails = tripDestination
-        }
-      })
+      let newDestination = new Destination(location)
+      traveler.addMatchingDestinations(newDestination)
     })
   }
 
@@ -66,9 +58,80 @@ describe('Traveler', function() {
     expect(traveler2.trips).to.deep.equal([])
   })
 
+  it('should add matching traveler trips', function() {
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
+
+    expect(traveler1.trips).to.deep.equal([{
+      "id": 117,
+      "userId": 1,
+      "destinationId": 28,
+      "travelers": 3,
+      "date": "2021/01/09",
+      "duration": 15,
+      "status": "approved",
+      "suggestedActivities": []
+    }])
+    expect(traveler2.trips[0]).to.deep.equal({
+      "id": 89,
+      "userId": 2,
+      "destinationId": 10,
+      "travelers": 5,
+      "date": "2019/09/27",
+      "duration": 13,
+      "status": "approved",
+      "suggestedActivities": []
+    })
+  })
+
+  it('should add a matching destination to each traveler trip', function() {
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
+
+    matchTripDestinations(traveler1)
+    matchTripDestinations(traveler2)
+
+    expect(traveler1.trips).to.deep.equal([{
+      "id": 117,
+      "userId": 1,
+      "destinationId": 28,
+      "travelers": 3,
+      "date": "2021/01/09",
+      "duration": 15,
+      "status": "approved",
+      "suggestedActivities": [],
+      "destinationDetails": {
+        "id": 28,
+        "name": "San Juan, Puerto Rico",
+        "lodging": 70,
+        "flights": 900,
+        "image": "https://images.unsplash.com/photo-1580237541049-2d715a09486e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80",
+        "alt": "white and brown concrete buildings near sea under white clouds during daytime"
+      }
+    }])
+    expect(traveler2.trips[0]).to.deep.equal({
+      "id": 89,
+      "userId": 2,
+      "destinationId": 10,
+      "travelers": 5,
+      "date": "2019/09/27",
+      "duration": 13,
+      "status": "approved",
+      "suggestedActivities": [],
+      "destinationDetails": {
+        "id": 10,
+        "name": "Toronto, Canada",
+        "lodging": 90,
+        "flights": 450,
+        "image": "https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80",
+        "alt": "beautiful travel destination"
+      }
+    })
+  })
+
   it('should filter trips by current year (2021)', function() {
-    matchTrips(traveler1)
-    matchTrips(traveler2)
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
 
     expect(traveler1.getTripsThisYear()).to.deep.equal([{
       "id": 117,
@@ -84,11 +147,11 @@ describe('Traveler', function() {
   })
 
   it('should calculate total spent for a trip in 2021, including 10% agent fee', function() {
-    matchTrips(traveler1)
-    matchTrips(traveler2)
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
 
-    matchDestinations(traveler1)
-    matchDestinations(traveler2)
+    matchTripDestinations(traveler1)
+    matchTripDestinations(traveler2)
 
     traveler1.getTripsThisYear()
     traveler2.getTripsThisYear()
