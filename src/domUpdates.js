@@ -1,5 +1,11 @@
 const welcomeText = document.querySelector('#welcome-text')
 const totalSpent = document.querySelector('#total-spent')
+const dateInput = document.querySelector('#trip-start')
+const durationInput = document.querySelector('#trip-duration')
+const travelersInput = document.querySelector('#trip-travelers')
+const destinationDropdown = document.querySelector('#trip-destination')
+const tripCost = document.querySelector('#trip-cost')
+const buttonSubmit = document.querySelector('#button-submit')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 
@@ -10,6 +16,13 @@ const domUpdates = {
 
   displayTotalSpent(currentTraveler) {
     totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
+  },
+
+  addDestinationsToDropdown(destination) {
+    const newOption = document.createElement('option')
+    newOption.innerText = destination.name
+    newOption.value = destination.name
+    destinationDropdown.appendChild(newOption)
   },
 
   addCardToDom(trip) {
@@ -25,6 +38,26 @@ const domUpdates = {
     newTripCard.querySelector('p.card-status').innerHTML = `<strong>Status:</strong> ${trip.status}`
 
     cardGrid.appendChild(newTripCard)
+  },
+
+  addTripQuoteToDom(costEstimate) {
+    const formattedCost = costEstimate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    tripCost.classList.remove('hidden')
+    tripCost.innerHTML = `<strong>Estimated Trip Cost:</strong> $${formattedCost}`
+    buttonSubmit.classList.remove('hidden')
+  },
+
+  resetForm() {
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
+    dateInput.value = "";
+    durationInput.value = "";
+    travelersInput.value = "";
+    destinationDropdown.value = "";
+  },
+
+  clearTripCards() {
+    cardGrid.querySelectorAll('article').forEach(article => article.remove())
   }
 }
 
