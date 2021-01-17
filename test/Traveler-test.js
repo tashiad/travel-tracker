@@ -2,6 +2,10 @@ import chai from 'chai';
 const expect = chai.expect;
 import Traveler from '../src/Traveler'
 import travelerData from '../src/data/Traveler-data'
+import Trip from '../src/Trip'
+import tripData from '../src/data/Trip-data'
+import Destination from '../src/Destination'
+import destinationData from '../src/data/Destination-data'
 
 describe('Traveler', function() {
   let traveler1
@@ -40,4 +44,66 @@ describe('Traveler', function() {
     expect(traveler2.trips).to.deep.equal([])
   })
 
+  it('should filter trips by current year (2021)', function() {
+    function matchTrips(traveler) {
+      tripData.forEach(trip => {
+        let travelerTrip = new Trip(trip)
+
+        if (travelerTrip.userId === traveler.id) {
+          traveler.trips.push(travelerTrip)
+        }
+      })
+    }
+
+    matchTrips(traveler1)
+    matchTrips(traveler2)
+
+    expect(traveler1.getTripsThisYear()).to.deep.equal([{
+      "id": 117,
+      "userId": 1,
+      "destinationId": 28,
+      "travelers": 3,
+      "date": "2021/01/09",
+      "duration": 15,
+      "status": "approved",
+      "suggestedActivities": []
+    }])
+    expect(traveler2.getTripsThisYear()).to.deep.equal([])
+  })
+
+  it('should calculate total spent for a trip in 2021, including 10% agent fee', function() {
+    function matchTrips(traveler) {
+      tripData.forEach(trip => {
+        let travelerTrip = new Trip(trip)
+
+        if (travelerTrip.userId === traveler.id) {
+          traveler.trips.push(travelerTrip)
+        }
+      })
+    }
+
+    matchTrips(traveler1)
+    matchTrips(traveler2)
+
+    function matchDestinations(traveler) {
+      destinationData.forEach(location => {
+        let tripDestination = new Destination(location)
+
+        traveler.trips.forEach(trip => {
+          if (trip.destinationId === tripDestination.id) {
+            trip.destinationDetails = tripDestination
+          }
+        })
+      })
+    }
+
+    matchDestinations(traveler1)
+    matchDestinations(traveler2)
+
+    traveler1.getTripsThisYear()
+    traveler2.getTripsThisYear()
+
+    expect(traveler1.calculateTotalSpent()).to.eq('4,125')
+    expect(traveler2.calculateTotalSpent()).to.eq('0')
+  })
 })
