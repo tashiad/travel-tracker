@@ -12,6 +12,14 @@ class Traveler {
     }
   }
 
+  addMatchingDestinations(newDestination) {
+    this.trips.forEach(trip => {
+      if (trip.destinationId === newDestination.id) {
+        trip.destinationDetails = newDestination
+      }
+    })
+  }
+
   getTripsThisYear() {
     return this.trips.filter(trip => trip.date.includes('2021'))
   }

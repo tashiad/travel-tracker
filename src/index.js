@@ -48,13 +48,8 @@ function findTravelerTrips(tripData) {
 
 function matchTripDestinations(destinationData) {
   destinationData.destinations.forEach(location => {
-    let tripDestination = new Destination(location)
-
-    currentTraveler.trips.forEach(trip => {
-      if (trip.destinationId === tripDestination.id) {
-        trip.destinationDetails = tripDestination
-      }
-    })
+    let newDestination = new Destination(location)
+    currentTraveler.addMatchingDestinations(newDestination)
   })
   domUpdates.displayTotalSpent(currentTraveler)
 }
