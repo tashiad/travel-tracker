@@ -23,7 +23,7 @@ Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
   .then(values => {
     generateTraveler(values[0])
     findTravelerTrips(values[1])
-    matchTripDestinations(values[2])
+    generateTripDestinations(values[2])
     createTripCards()
   })
   .catch(handleErrorMessages)
@@ -46,7 +46,7 @@ function findTravelerTrips(tripData) {
   })
 }
 
-function matchTripDestinations(destinationData) {
+function generateTripDestinations(destinationData) {
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
     domUpdates.addDestinationsToDropdown(newDestination)
