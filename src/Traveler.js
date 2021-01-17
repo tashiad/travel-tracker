@@ -6,6 +6,12 @@ class Traveler {
     this.trips = []
   }
 
+  addMatchingTrips(newTrip) {
+    if (newTrip.userId === this.id) {
+      this.trips.push(newTrip)
+    }
+  }
+
   getTripsThisYear() {
     return this.trips.filter(trip => trip.date.includes('2021'))
   }

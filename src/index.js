@@ -41,11 +41,8 @@ function generateTraveler(travelerData) {
 
 function findTravelerTrips(tripData) {
   tripData.trips.forEach(trip => {
-    let travelerTrip = new Trip(trip)
-
-    if (travelerTrip.userId === currentTraveler.id) {
-      currentTraveler.trips.push(travelerTrip)
-    }
+    let newTrip = new Trip(trip)
+    currentTraveler.addMatchingTrips(newTrip)
   })
 }
 
