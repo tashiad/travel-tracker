@@ -1,5 +1,6 @@
 const welcomeText = document.querySelector('#welcome-text')
 const totalSpent = document.querySelector('#total-spent')
+const destinationDropdown = document.querySelector('#trip-destination')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 
@@ -10,6 +11,12 @@ const domUpdates = {
 
   displayTotalSpent(currentTraveler) {
     totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
+  },
+
+  addDestinationsToDropdown(destination) {
+    const newOption = document.createElement('option')
+    newOption.innerText = destination.name
+    destinationDropdown.appendChild(newOption)
   },
 
   addCardToDom(trip) {

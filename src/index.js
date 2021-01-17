@@ -49,6 +49,7 @@ function findTravelerTrips(tripData) {
 function matchTripDestinations(destinationData) {
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
+    domUpdates.addDestinationsToDropdown(newDestination)
     currentTraveler.addMatchingDestinations(newDestination)
   })
   domUpdates.displayTotalSpent(currentTraveler)
