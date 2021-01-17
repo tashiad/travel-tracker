@@ -1,10 +1,15 @@
 const welcomeText = document.querySelector('#welcome-text')
+const totalSpent = document.querySelector('#total-spent')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 
 const domUpdates = {
   addWelcomeMessage(firstName) {
     welcomeText.innerText = `Welcome ${firstName}! Here are your trips.`
+  },
+
+  displayTotalSpent(currentTraveler) {
+    totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
   },
 
   addCardToDom(trip) {
