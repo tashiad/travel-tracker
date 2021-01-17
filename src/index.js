@@ -1,5 +1,5 @@
 import './css/index.scss'
-import domUpdates from'./domUpdates.js'
+import domUpdates from './domUpdates.js'
 import fetchApi from './fetchApi.js'
 import Traveler from './Traveler.js'
 import Destination from './Destination.js'
@@ -15,9 +15,10 @@ const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
 
 buttonQuote.addEventListener('click', quoteTrip)
-// buttonSubmit.addEventListener('click', tbd)
+buttonSubmit.addEventListener('click', requestTrip)
 
 const allDestinations = []
+const allTrips = []
 let currentTraveler
 
 const fetchedTravelerData = fetchApi.getTravelerData()
@@ -34,7 +35,7 @@ Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
   .catch(handleErrorMessages)
 
 function handleErrorMessages(error) {
-  // window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
   console.log(error)
 }
 
@@ -47,12 +48,13 @@ function generateTraveler(travelerData) {
 function findTravelerTrips(tripData) {
   tripData.trips.forEach(trip => {
     let newTrip = new Trip(trip)
+    allTrips.push(trip)
     currentTraveler.addMatchingTrips(newTrip)
   })
 }
 
 function generateTripDestinations(destinationData) {
-  alphabetizeDestinations(destinationData)
+  alphabetizeDestinations(destinationData) // SHOULD PROBABLY COME FROM GLOBAL INSTEAD
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
     allDestinations.push(newDestination)
@@ -63,7 +65,7 @@ function generateTripDestinations(destinationData) {
 }
 
 function alphabetizeDestinations(destinationData) {
-  destinationData.destinations.sort((a, b) => {
+  destinationData.destinations.sort((a, b) => { // CHANGE ARRAY TO GLOBAL
     return a.destination.localeCompare(b.destination)
   })
 }
@@ -74,18 +76,52 @@ function createTripCards() {
   })
 }
 
+function findDestination() {
+  return allDestinations.find(location => {
+    return location.name === destinationDropdown.value
+  })
+}
+
 function quoteTrip() {
   let tripEstimate = 0
   let totalEstimate = 0
-
-  const matchingDest = allDestinations.find(location => {
-    return location.name === destinationDropdown.value
-  })
+  const matchingDest = findDestination()
 
   tripEstimate += durationInput.value * matchingDest.lodging
   tripEstimate += travelersInput.value * matchingDest.flights
 
   totalEstimate = tripEstimate + (tripEstimate * .1)
-  
+
   domUpdates.addTripQuoteToDom(totalEstimate)
+}
+
+function createNewTripId() {
+  const lastId = allTrips[allTrips.length -1].id // MAKE SURE THIS UPDATES W/ EACH POST TO AVOID DUPLICATES. SORT FIRST?
+  const newId = lastId + 1
+  return newId
+}
+
+function formatDate(dateValue) {
+  return dateValue.replace(/-/g, '/')
+}
+
+function requestTrip() {
+  const matchingDest = findDestination()
+
+  const tripRequest = {
+    id: createNewTripId(),
+    userID: currentTraveler.id,
+    destinationID: matchingDest.id,
+    travelers: travelersInput.value,
+    date: formatDate(dateInput.value),
+    duration: durationInput.value,
+    status: 'pending',
+    suggestedActivities: []
+  }
+
+  fetchApi.postTripRequest(tripRequest).catch(handleErrorMessages)
+
+  domUpdates.clearInputs()
+  domUpdates.clearTripCards()
+  createTripCards()
 }
