@@ -17,26 +17,20 @@
     <aside class="sidebar">
       <h3>Plan A New Trip</h3>
       <form class="trip-form" action="index.html" method="post">
-        <!-- <input id="trip-id" name="trip-id" type="hidden" value="xm234jq">
-        <input id="user-id" name="user-id" type="hidden" value="xm234jq"> -->
         <label for="trip-start">Start Date:</label>
         <input type="date" id="trip-start" name="trip-start" required>
-
         <label for="trip-duration">Number of Days:</label>
         <input type="number" id="trip-duration" name="trip-duration" min="1" required>
-
         <label for="trip-travelers">Number of Travelers:</label>
         <input type="number" id="trip-travelers" name="trip-travelers" min="1" required>
-
         <label for="trip-destination">Destination:</label>
         <select id="trip-destination" name="trip-destination" required>
           <option value="" disabled selected>Select a destination</option>
         </select>
-        <!-- <input id="trip-status" name="trip-status" type="hidden" value="pending"> -->
-        <!-- <input id="suggested-activities" name="suggested-activities" type="hidden" value="xm234jq"> -->
         <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
         <p class="hidden" id="trip-cost"></p>
         <button class="button button-submit hidden" id="button-submit" type="button" name="button">Request Trip</button>
+        <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
       </form>
     </aside>
     <section class="all-trips">

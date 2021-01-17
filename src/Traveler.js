@@ -7,7 +7,7 @@ class Traveler {
   }
 
   addMatchingTrips(newTrip) {
-    if (newTrip.userId === this.id) {
+    if ((newTrip.userId === this.id) && (!this.trips.includes(newTrip.id))) {
       this.trips.push(newTrip)
     }
   }
@@ -20,14 +20,16 @@ class Traveler {
     })
   }
 
-  getTripsThisYear() {
-    return this.trips.filter(trip => trip.date.includes('2021'))
+  getTripsPaidForThisYear() {
+    return this.trips.filter(trip => {
+      return trip.date.includes('2021') && trip.status === 'approved' // NEED TO TEST THAT THIS IS WORKING
+    })
   }
 
   calculateTotalSpent() {
     let tripSpend = 0
     let totalSpent = 0
-    const tripsThisYear = this.getTripsThisYear()
+    const tripsThisYear = this.getTripsPaidForThisYear()
 
     tripsThisYear.forEach(trip => {
       tripSpend += trip.duration * trip.destinationDetails.lodging

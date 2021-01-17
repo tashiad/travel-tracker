@@ -13,6 +13,7 @@ const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
+const requestMessage = document.querySelector('#trip-request-message')
 
 buttonQuote.addEventListener('click', quoteTrip)
 buttonSubmit.addEventListener('click', requestTrip)
@@ -35,7 +36,7 @@ Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
   .catch(handleErrorMessages)
 
 function handleErrorMessages(error) {
-  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  // window.alert('The server was not accessible at this time. Please reload the page or try again later.')
   console.log(error)
 }
 
@@ -96,7 +97,7 @@ function quoteTrip() {
 }
 
 function createNewTripId() {
-  const lastId = allTrips[allTrips.length -1].id // MAKE SURE THIS UPDATES W/ EACH POST TO AVOID DUPLICATES. SORT FIRST?
+  const lastId = allTrips[allTrips.length - 1].id // MAKE SURE THIS UPDATES W/ EACH POST TO AVOID DUPLICATES. SORT FIRST?
   const newId = lastId + 1
   return newId
 }
@@ -112,16 +113,21 @@ function requestTrip() {
     id: createNewTripId(),
     userID: currentTraveler.id,
     destinationID: matchingDest.id,
-    travelers: travelersInput.value,
+    travelers: parseInt(travelersInput.value),
     date: formatDate(dateInput.value),
-    duration: durationInput.value,
+    duration: parseInt(durationInput.value),
     status: 'pending',
     suggestedActivities: []
   }
 
-  fetchApi.postTripRequest(tripRequest).catch(handleErrorMessages)
-
-  domUpdates.clearInputs()
-  domUpdates.clearTripCards()
-  createTripCards()
+  fetchApi.postTripRequest(tripRequest)
+    .then(responses => {
+      const newTrip = new Trip(tripRequest)
+      currentTraveler.trips.push(newTrip)
+      currentTraveler.addMatchingDestinations(matchingDest)
+      domUpdates.clearTripCards()
+      createTripCards()
+      requestMessage.classList.remove('hidden')
+      domUpdates.resetForm()
+    }).catch(handleErrorMessages)
 }
