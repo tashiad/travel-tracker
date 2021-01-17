@@ -9,7 +9,7 @@ const domUpdates = {
   },
 
   displayTotalSpent(currentTraveler) {
-    totalSpent.innerHTML = `Total amount spent on trips this year: $${currentTraveler.calculateTotalSpent()}`
+    totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
   },
 
   addCardToDom(trip) {
