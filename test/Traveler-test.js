@@ -13,6 +13,28 @@ describe('Traveler', function() {
   let traveler2
   let traveler2Info
 
+  function matchTrips(traveler) {
+    tripData.forEach(trip => {
+      let travelerTrip = new Trip(trip)
+
+      if (travelerTrip.userId === traveler.id) {
+        traveler.trips.push(travelerTrip)
+      }
+    })
+  }
+
+  function matchDestinations(traveler) {
+    destinationData.forEach(location => {
+      let tripDestination = new Destination(location)
+
+      traveler.trips.forEach(trip => {
+        if (trip.destinationId === tripDestination.id) {
+          trip.destinationDetails = tripDestination
+        }
+      })
+    })
+  }
+
   beforeEach(function() {
     traveler1Info = travelerData[0]
     traveler1 = new Traveler(traveler1Info)
@@ -45,16 +67,6 @@ describe('Traveler', function() {
   })
 
   it('should filter trips by current year (2021)', function() {
-    function matchTrips(traveler) {
-      tripData.forEach(trip => {
-        let travelerTrip = new Trip(trip)
-
-        if (travelerTrip.userId === traveler.id) {
-          traveler.trips.push(travelerTrip)
-        }
-      })
-    }
-
     matchTrips(traveler1)
     matchTrips(traveler2)
 
@@ -72,30 +84,8 @@ describe('Traveler', function() {
   })
 
   it('should calculate total spent for a trip in 2021, including 10% agent fee', function() {
-    function matchTrips(traveler) {
-      tripData.forEach(trip => {
-        let travelerTrip = new Trip(trip)
-
-        if (travelerTrip.userId === traveler.id) {
-          traveler.trips.push(travelerTrip)
-        }
-      })
-    }
-
     matchTrips(traveler1)
     matchTrips(traveler2)
-
-    function matchDestinations(traveler) {
-      destinationData.forEach(location => {
-        let tripDestination = new Destination(location)
-
-        traveler.trips.forEach(trip => {
-          if (trip.destinationId === tripDestination.id) {
-            trip.destinationDetails = tripDestination
-          }
-        })
-      })
-    }
 
     matchDestinations(traveler1)
     matchDestinations(traveler2)

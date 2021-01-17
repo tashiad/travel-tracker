@@ -20,7 +20,7 @@ class Traveler {
       tripSpend += trip.travelers * trip.destinationDetails.flights
     })
 
-    totalSpent += tripSpend + (tripSpend * .1)
+    totalSpent = tripSpend + (tripSpend * .1)
     return totalSpent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   }
 
