@@ -17,23 +17,26 @@
     <aside class="sidebar">
       <h3>Plan A New Trip</h3>
       <form class="trip-form" action="index.html" method="post">
-        <input id="trip-id" name="trip-id" type="hidden" value="xm234jq">
-        <input id="user-id" name="user-id" type="hidden" value="xm234jq">
+        <!-- <input id="trip-id" name="trip-id" type="hidden" value="xm234jq">
+        <input id="user-id" name="user-id" type="hidden" value="xm234jq"> -->
         <label for="trip-start">Start Date:</label>
         <input type="date" id="trip-start" name="trip-start" value="2021-01-01" required>
+
         <label for="trip-duration">Number of Days:</label>
         <input type="number" id="trip-duration" name="trip-duration" min="1" required>
+
         <label for="trip-travelers">Number of Travelers:</label>
         <input type="number" id="trip-travelers" name="trip-travelers" min="1" required>
+
         <label for="trip-destination">Destination:</label>
         <select id="trip-destination" name="trip-destination" required>
           <option value="" disabled selected>Select a destination</option>
         </select>
-        <input id="trip-status" name="trip-status" type="hidden" value="pending">
-        <input id="suggested-activities" name="suggested-activities" type="hidden" value="xm234jq">
+        <!-- <input id="trip-status" name="trip-status" type="hidden" value="pending"> -->
+        <!-- <input id="suggested-activities" name="suggested-activities" type="hidden" value="xm234jq"> -->
         <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
-        <p class="hidden"><strong>Estimated Trip Cost:</strong> $1,467</p>
-        <input class="button button-submit hidden" id="button-submit" type="submit" value="Submit Trip Request">
+        <p class="hidden" id="trip-cost"></p>
+        <input class="button button-submit hidden" id="button-submit" type="submit" value="Request Trip">
       </form>
     </aside>
     <section class="all-trips">

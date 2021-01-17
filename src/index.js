@@ -7,12 +7,17 @@ import Trip from './Trip.js'
 
 const welcomeText = document.querySelector('#welcome-text')
 const cardGrid = document.querySelector('.card-grid')
+const dateInput = document.querySelector('#trip-start')
+const durationInput = document.querySelector('#trip-duration')
+const travelersInput = document.querySelector('#trip-travelers')
+const destinationDropdown = document.querySelector('#trip-destination')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
 
-// buttonQuote.addEventListener('click', tbd)
+buttonQuote.addEventListener('click', quoteTrip)
 // buttonSubmit.addEventListener('click', tbd)
 
+const allDestinations = []
 let currentTraveler
 
 const fetchedTravelerData = fetchApi.getTravelerData()
@@ -46,24 +51,41 @@ function findTravelerTrips(tripData) {
   })
 }
 
-function alphabetizeDestinations(destinationData) {
-  destinationData.destinations.sort((a, b) => {
-    return a.destination.localeCompare(b.destination)
-  })
-}
-
 function generateTripDestinations(destinationData) {
   alphabetizeDestinations(destinationData)
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
+    allDestinations.push(newDestination)
     domUpdates.addDestinationsToDropdown(newDestination)
     currentTraveler.addMatchingDestinations(newDestination)
   })
   domUpdates.displayTotalSpent(currentTraveler)
 }
 
+function alphabetizeDestinations(destinationData) {
+  destinationData.destinations.sort((a, b) => {
+    return a.destination.localeCompare(b.destination)
+  })
+}
+
 function createTripCards() {
   currentTraveler.trips.forEach(trip => {
     domUpdates.addCardToDom(trip)
   })
+}
+
+function quoteTrip() {
+  let tripEstimate = 0
+  let totalEstimate = 0
+
+  const matchingDest = allDestinations.find(location => {
+    return location.name === destinationDropdown.value
+  })
+
+  tripEstimate += durationInput.value * matchingDest.lodging
+  tripEstimate += travelersInput.value * matchingDest.flights
+
+  totalEstimate = tripEstimate + (tripEstimate * .1)
+  
+  domUpdates.addTripQuoteToDom(totalEstimate)
 }
