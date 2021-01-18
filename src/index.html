@@ -12,15 +12,21 @@
 <body>
   <header>
     <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
+    <form class="sign-in-form">
+      <label for="username-field" class="sign-in-label">Username</label>
+      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
+      <label for="password-field" class="sign-in-label">Password</label>
+      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>
+      <label for="login-form-submit" class="sign-in-label">Submit</label>
+      <input type="submit" value="Sign In" id="login-form-submit" class="button-signin">
+    </form>
+    <h2 class="hidden" id="welcome-text"></h2>
   </header>
-  <section class="banner">
-    <h2 id="welcome-text"></h2>
-  </section>
   <main>
     <aside class="sidebar">
       <img class="icon" src="./images/undraw_travel_mode_7sf4.svg" alt="">
       <h2>Plan A New Trip</h2>
-      <form class="trip-form" action="index.html" method="post">
+      <form class="trip-form">
         <label for="trip-start">Start Date:</label>
         <input type="date" id="trip-start" name="trip-start" required>
         <label for="trip-duration">Number of Days:</label>
@@ -36,14 +42,22 @@
         <button class="button button-submit hidden" id="button-submit" type="button" name="button">Request Trip</button>
         <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
       </form>
+      <aside class="trip-stats">
+        <h3>Your Stats</h3>
+        <p class="stat" id="total-spent"></p>
+        <p>Total amount spent on trips in 2021</p>
+        <p class="stat" id="">$150</p>
+        <p>Total amount spent on trips in 2021</p>
+        <p class="stat" id="">$1,762</p>
+        <p>Total amount spent on trips in 2021</p>
+      </aside>
     </aside>
     <section class="all-trips">
       <h2>Your Trips</h2>
-      <h3 id="total-spent"></h3>
       <section class="card-grid">
         <template class="template-card">
           <article class="card">
-            <h4 class="card-destination"></h4>
+            <h3 class="card-destination"></h3>
             <img class="card-image" src="source" alt="alt-text">
             <p class="card-travelers"></p>
             <p class="card-date"></p>

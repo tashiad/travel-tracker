@@ -11,11 +11,11 @@ const cardTemplate = document.querySelector('.template-card')
 
 const domUpdates = {
   addWelcomeMessage(firstName) {
-    welcomeText.innerText = `Welcome ${firstName}!`
+    welcomeText.innerText = `Welcome, ${firstName}!`
   },
 
   displayTotalSpent(currentTraveler) {
-    totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
+    totalSpent.innerText = `$${currentTraveler.calculateTotalSpent()}`
   },
 
   addDestinationsToDropdown(destination) {
@@ -27,7 +27,7 @@ const domUpdates = {
 
   addCardToDom(trip) {
     const newTripCard = cardTemplate.content.cloneNode(true)
-    newTripCard.querySelector('h4.card-destination').innerText = trip.destinationDetails.name
+    newTripCard.querySelector('h3.card-destination').innerText = trip.destinationDetails.name
     newTripCard.querySelector('img.card-image').src = trip.destinationDetails.image
     newTripCard.querySelector('img.card-image').alt = trip.destinationDetails.alt
     newTripCard.querySelector('p.card-travelers').innerHTML = `<strong>Travelers:</strong> ${trip.travelers}`
