@@ -11,7 +11,7 @@ const cardTemplate = document.querySelector('.template-card')
 
 const domUpdates = {
   addWelcomeMessage(firstName) {
-    welcomeText.innerText = `Welcome ${firstName}! Here are your trips.`
+    welcomeText.innerText = `Welcome ${firstName}!`
   },
 
   displayTotalSpent(currentTraveler) {
