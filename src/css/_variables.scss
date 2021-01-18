@@ -2,7 +2,10 @@
 $primary-font: "Open Sans", sans-serif;
 
 // COLORS
-$dark-purple: #424BB2;
+$blue: #00B0FE;
+$light-gray: #90A9CA;
+$dark-gray: #585A89;
 
-// HOVER
-$button-hover: 0px 2px 4px black;
+// BASIC ANIMATIONS
+// $button-hover: inset 0px 0px 2px 2px black;
+$transition: .5s ease;
