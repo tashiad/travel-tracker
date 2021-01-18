@@ -1,32 +1,63 @@
-.banner {
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url("../images/plane-banner.jpg");
+header {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 150px;
-  margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
 
-  #welcome-text {
-    text-align: center;
+  .fa-plane {
     color: white;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  p {
+    font-weight: bold;
   }
 }
 
-.fa-plane {
-  color: $light-gray;
-}
+.sign-in-form {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
 
-.icon {
-  height: 15%;
-  width: 80%;
+  input {
+    border: none;
+    border-radius: 2px;
+    box-shadow: none;
+    margin: 1%;
+    padding-left: 1%;
+  }
+
+  .button-signin {
+    font-weight: bold;
+    color: white;
+    background-color: $blue;
+    width: 20%;
+
+    &:hover {
+      color: $blue;
+      background-color: white;
+    }
+  }
 }
 
 .sidebar {
   border-right: 1px solid lightgray;
   padding-left: 10%;
   padding-right: 10%;
+
+  .icon {
+    height: 125px;
+    width: 150px;
+    margin-top: 5%;
+  }
 }
 
 .all-trips {
@@ -40,23 +71,43 @@
   // ^^ is this working?
 }
 
+@media screen and (max-width: 1200px) {
+  .sign-in-form {
+    flex-direction: column;
+    width: 25%;
+
+    .button-signin {
+      width: 50%;
+    }
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .all-trips {
     padding-right: 8%;
   }
+}
 
-  .icon {
-    height: 10%;
+@media screen and (max-width: 900px) {
+  header {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .sign-in-form {
+    flex-direction: row;
+    justify-content: center;
+    width: 70%;
+
+    .button-signin {
+      height: auto;
+    }
   }
 }
 
 @media screen and (max-width: 750px) {
   .all-trips {
     padding-right: 3%;
-  }
-
-  .icon {
-    height: 5%;
   }
 }
 

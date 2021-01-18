@@ -21,7 +21,6 @@ input,
 }
 
 .button-quote {
-  // border: 2px solid $light-gray;
   border: none;
   background-color: $dark-gray;
   border-radius: 3px;
@@ -31,7 +30,6 @@ input,
 
   &:hover {
     background-color: $light-gray;
-    // box-shadow: $button-hover;
     transition: $transition;
   }
 }
@@ -39,5 +37,5 @@ input,
 .button-submit {
   @extend .button-quote;
   color: white;
-  background-color: $dark-gray;
+  background-color: $blue;
 }
