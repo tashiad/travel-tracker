@@ -9,9 +9,7 @@ h1 {
 }
 
 h2 {
-  margin: 0;
   font-size: 1.8em;
-  color: $dark-purple;
 }
 
 h3 {
@@ -26,7 +24,7 @@ h4 {
 
 p {
   font-size: 1em;
-  margin: 0;
+  margin: 2px;
 }
 
 header {
@@ -36,4 +34,29 @@ header {
 main {
   display: grid;
   grid-template-columns: minmax(150px, 25%) 1fr;
+}
+
+@media screen and (max-width: 1400px) {
+  body {
+    margin: 0 0 15% 0;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  main {
+    grid-template-columns: minmax(150px, 35%) 1fr;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  h1 {
+    text-align: center;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    grid-column-gap: 1%;
+  }
 }

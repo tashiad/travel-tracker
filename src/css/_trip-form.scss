@@ -5,6 +5,13 @@
 
 label {
   margin-top: 5%;
+  margin-bottom: 2%;
+  font-weight: bold;
+}
+
+input,
+#trip-destination {
+  height: 30px;
 }
 
 .button {
@@ -14,18 +21,23 @@ label {
 }
 
 .button-quote {
-  border: 1px solid $dark-purple;
+  // border: 2px solid $light-gray;
+  border: none;
+  background-color: $dark-gray;
   border-radius: 3px;
   font-size: 1em;
+  font-weight: bold;
+  color: white;
 
   &:hover {
-    box-shadow: $button-hover;
-    transition: .5s ease;
+    background-color: $light-gray;
+    // box-shadow: $button-hover;
+    transition: $transition;
   }
 }
 
 .button-submit {
   @extend .button-quote;
   color: white;
-  background-color: $dark-purple;
+  background-color: $dark-gray;
 }

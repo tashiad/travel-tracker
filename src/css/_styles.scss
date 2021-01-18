@@ -1,3 +1,28 @@
+.banner {
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),url("../images/plane-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  margin-bottom: 2%;
+
+  #welcome-text {
+    text-align: center;
+    color: white;
+  }
+}
+
+.fa-plane {
+  color: $light-gray;
+}
+
+.icon {
+  height: 15%;
+  width: 80%;
+}
+
 .sidebar {
   border-right: 1px solid lightgray;
   padding-left: 10%;
@@ -5,11 +30,54 @@
 }
 
 .all-trips {
-  padding-left: 5%;
+  padding-left: 3%;
   padding-right: 5%;
 }
 
 .hidden {
   display: none;
-  transition: .5s ease;
+  transition: $transition;
+  // ^^ is this working?
+}
+
+@media screen and (max-width: 1000px) {
+  .all-trips {
+    padding-right: 8%;
+  }
+
+  .icon {
+    height: 10%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .all-trips {
+    padding-right: 3%;
+  }
+
+  .icon {
+    height: 5%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .banner {
+    margin-bottom: 0;
+  }
+
+  .sidebar {
+    background-color: $light-gray;
+    border-right: none;
+  }
+
+  .icon {
+    display: none;
+  }
+
+  .all-trips {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }

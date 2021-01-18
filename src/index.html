@@ -13,9 +13,13 @@
   <header>
     <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
   </header>
+  <section class="banner">
+    <h2 id="welcome-text"></h2>
+  </section>
   <main>
     <aside class="sidebar">
-      <h3>Plan A New Trip</h3>
+      <img class="icon" src="./images/undraw_travel_mode_7sf4.svg" alt="">
+      <h2>Plan A New Trip</h2>
       <form class="trip-form" action="index.html" method="post">
         <label for="trip-start">Start Date:</label>
         <input type="date" id="trip-start" name="trip-start" required>
@@ -25,7 +29,7 @@
         <input type="number" id="trip-travelers" name="trip-travelers" min="1" required>
         <label for="trip-destination">Destination:</label>
         <select id="trip-destination" name="trip-destination" required>
-          <option value="" disabled selected>Select a destination</option>
+          <option value="" disabled selected></option>
         </select>
         <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
         <p class="hidden" id="trip-cost"></p>
@@ -34,8 +38,8 @@
       </form>
     </aside>
     <section class="all-trips">
-      <h2 id="welcome-text"></h2>
-      <h4 id="total-spent"></h4>
+      <h2>Your Trips</h2>
+      <h3 id="total-spent"></h3>
       <section class="card-grid">
         <template class="template-card">
           <article class="card">

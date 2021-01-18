@@ -1,4 +1,6 @@
 import './css/index.scss'
+import './images/plane-banner.jpg'
+import './images/undraw_travel_mode_7sf4.svg'
 import domUpdates from './domUpdates.js'
 import fetchApi from './fetchApi.js'
 import Traveler from './Traveler.js'
