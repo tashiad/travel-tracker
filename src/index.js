@@ -57,7 +57,7 @@ function findTravelerTrips(tripData) {
 }
 
 function generateTripDestinations(destinationData) {
-  alphabetizeDestinations(destinationData) // SHOULD PROBABLY COME FROM GLOBAL INSTEAD
+  alphabetizeDestinations(destinationData)
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
     allDestinations.push(newDestination)
@@ -68,7 +68,7 @@ function generateTripDestinations(destinationData) {
 }
 
 function alphabetizeDestinations(destinationData) {
-  destinationData.destinations.sort((a, b) => { // CHANGE ARRAY TO GLOBAL
+  destinationData.destinations.sort((a, b) => {
     return a.destination.localeCompare(b.destination)
   })
 }
@@ -98,12 +98,6 @@ function quoteTrip() {
   domUpdates.addTripQuoteToDom(totalEstimate)
 }
 
-function createNewTripId() {
-  const lastId = allTrips[allTrips.length - 1].id // MAKE SURE THIS UPDATES W/ EACH POST TO AVOID DUPLICATES. SORT FIRST?
-  const newId = lastId + 1
-  return newId
-}
-
 function formatDate(dateValue) {
   return dateValue.replace(/-/g, '/')
 }
@@ -112,7 +106,7 @@ function requestTrip() {
   const matchingDest = findDestination()
 
   const tripRequest = {
-    id: createNewTripId(),
+    id: Date.now(),
     userID: currentTraveler.id,
     destinationID: matchingDest.id,
     travelers: parseInt(travelersInput.value),
