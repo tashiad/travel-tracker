@@ -33,14 +33,26 @@ header {
 
   .button-signin {
     font-weight: bold;
-    color: white;
-    background-color: $blue;
+    color: $dark-gray;
+    background-color: white;
     width: 20%;
 
     &:hover {
       color: $blue;
       background-color: white;
     }
+  }
+
+  .sign-in-label {
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    white-space: nowrap;
+    clip-path: inset(1px);
   }
 }
 
@@ -67,6 +79,7 @@ header {
 
 .trip-stats {
   @extend .sidebar;
+  color: black;
   padding: 8% 5%;
   margin-top: 15%;
   border-radius: 2px;
@@ -80,7 +93,6 @@ header {
     font-size: 1.8em;
     font-weight: bold;
     margin-top: 10%;
-    color: white;
   }
 }
 

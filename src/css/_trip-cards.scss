@@ -3,6 +3,12 @@
   grid-column-gap: 6%;
   grid-row-gap: 7%;
   grid-template-columns: repeat(3, 1fr);
+
+  h3 {
+    font-size: 1.2em;
+    margin-top: 3%;
+    margin-bottom: 5%;
+  }
 }
 
 .card {
