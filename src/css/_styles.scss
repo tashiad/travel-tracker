@@ -1,4 +1,5 @@
 header {
+  grid-column: 1 / 4;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
   background-size: cover;
   background-position: center;
@@ -6,19 +7,14 @@ header {
   justify-content: space-between;
   align-items: center;
   height: 150px;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding: 0 2%;
 
   .fa-plane {
     color: white;
   }
 
-  h1 {
+  h1, h2 {
     color: white;
-  }
-
-  p {
-    font-weight: bold;
   }
 }
 
@@ -49,9 +45,8 @@ header {
 }
 
 .sidebar {
-  border-right: 1px solid lightgray;
-  padding-left: 10%;
-  padding-right: 10%;
+  border-right: $section-border;
+  padding: 0 10%;
 
   .icon {
     height: 125px;
@@ -62,13 +57,42 @@ header {
 
 .all-trips {
   padding-left: 3%;
-  padding-right: 5%;
+  padding-right: 6%;
+
+  h2 {
+    padding-bottom: 3%;
+    border-bottom: $section-border;
+  }
+}
+
+.trip-stats {
+  @extend .sidebar;
+  padding: 8% 5%;
+  margin-top: 15%;
+  border-radius: 2px;
+  background: $light-gray;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .stat {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 10%;
+    color: white;
+  }
 }
 
 .hidden {
   display: none;
   transition: $transition;
-  // ^^ is this working?
+}
+
+@media screen and (max-width: 1400px) {
+  .all-trips {
+    padding-right: 8%;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -82,16 +106,14 @@ header {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .all-trips {
-    padding-right: 8%;
-  }
-}
-
 @media screen and (max-width: 900px) {
   header {
     flex-direction: column;
     justify-content: flex-start;
+
+    h2 {
+      margin-top: 0;
+    }
   }
 
   .sign-in-form {
@@ -105,19 +127,12 @@ header {
   }
 }
 
-@media screen and (max-width: 750px) {
-  .all-trips {
-    padding-right: 3%;
-  }
-}
-
 @media screen and (max-width: 425px) {
-  .banner {
-    margin-bottom: 0;
+  header {
+    height: auto;
   }
 
   .sidebar {
-    background-color: $light-gray;
     border-right: none;
   }
 
@@ -126,9 +141,16 @@ header {
   }
 
   .all-trips {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 5%;
-    margin-right: 5%;
+    padding: 0;
+    margin: 0 5%;
+  }
+
+  .sign-in-form {
+    flex-direction: column;
+    margin-bottom: 5%;
+
+    .button-signin {
+      height: 30px;
+    }
   }
 }

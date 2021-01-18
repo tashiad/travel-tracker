@@ -11,11 +11,11 @@ const cardTemplate = document.querySelector('.template-card')
 
 const domUpdates = {
   addWelcomeMessage(firstName) {
-    welcomeText.innerText = `Welcome ${firstName}!`
+    welcomeText.innerText = `Welcome, ${firstName}!`
   },
 
   displayTotalSpent(currentTraveler) {
-    totalSpent.innerHTML = `Total amount spent on trips in 2021: $${currentTraveler.calculateTotalSpent()}`
+    totalSpent.innerText = `$${currentTraveler.calculateTotalSpent()}`
   },
 
   addDestinationsToDropdown(destination) {

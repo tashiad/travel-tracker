@@ -12,12 +12,12 @@
 <body>
   <header>
     <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
-    <form class="sign-in-form">
+    <form class="sign-in-form hidden">
       <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
       <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>
       <input type="submit" value="Sign In" id="login-form-submit" class="button-signin">
     </form>
-    <p class="hidden" id="welcome-text"></p>
+    <h2 class="" id="welcome-text"></h2>
   </header>
   <main>
     <aside class="sidebar">
@@ -39,10 +39,18 @@
         <button class="button button-submit hidden" id="button-submit" type="button" name="button">Request Trip</button>
         <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
       </form>
+      <aside class="trip-stats">
+        <h3>Your Stats</h3>
+        <p class="stat" id="total-spent"></p>
+        <p>Total amount spent on trips in 2021</p>
+        <p class="stat" id="">$150</p>
+        <p>Total amount spent on trips in 2021</p>
+        <p class="stat" id="">$1,762</p>
+        <p>Total amount spent on trips in 2021</p>
+      </aside>
     </aside>
     <section class="all-trips">
       <h2>Your Trips</h2>
-      <h3 id="total-spent"></h3>
       <section class="card-grid">
         <template class="template-card">
           <article class="card">

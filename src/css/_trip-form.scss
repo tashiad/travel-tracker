@@ -15,8 +15,7 @@ input,
 }
 
 .button {
-  margin-top: 8%;
-  margin-bottom: 8%;
+  margin: 8% 0;
   height: 40px;
 }
 
@@ -38,4 +37,8 @@ input,
   @extend .button-quote;
   color: white;
   background-color: $blue;
+}
+
+#trip-request-message {
+  margin-bottom: 10%;
 }
