@@ -1,4 +1,8 @@
 const welcomeText = document.querySelector('#welcome-text')
+const buttonSignIn = document.querySelector('#login-form-submit')
+const usernameInput = document.querySelector('#username-field')
+const passwordInput = document.querySelector('#password-field')
+const signInErrorMessage = document.querySelector("#sign-in-error-message")
 const totalSpent = document.querySelector('#total-spent')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
@@ -11,6 +15,22 @@ const cardTemplate = document.querySelector('.template-card')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 
 const domUpdates = {
+  validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
+    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined)) {
+      usernameInput.className = 'failure'
+      signInErrorMessage.classList.remove('hidden')
+    } else {
+      usernameInput.className = 'success'
+    }
+
+    if (passwordValue !== 'travel2020') {
+      passwordInput.className = 'failure'
+      signInErrorMessage.classList.remove('hidden')
+    } else {
+      passwordInput.className = 'success'
+    }
+  },
+
   addWelcomeMessage(firstName) {
     welcomeText.innerText = `Welcome, ${firstName}!`
   },
@@ -41,7 +61,7 @@ const domUpdates = {
     cardGrid.appendChild(newTripCard)
   },
 
-  validateInputs() {
+  validateTripInputs() {
     const dateValue = dateInput.value.trim()
     const durationValue = durationInput.value.trim()
     const travelersValue = travelersInput.value.trim()
@@ -52,34 +72,34 @@ const domUpdates = {
 
     if ((dateValue === '') || (inputDate < currentDate)) {
       dateInput.className = 'failure'
-      this.setErrors()
+      this.setTripErrors()
     } else {
       dateInput.className = 'success'
     }
 
     if ((durationValue === '') || (durationValue === '0')) {
       durationInput.className = 'failure'
-      this.setErrors()
+      this.setTripErrors()
     } else {
       durationInput.className = 'success'
     }
 
     if ((travelersValue === '') || (travelersValue === '0')) {
       travelersInput.className = 'failure'
-      this.setErrors()
+      this.setTripErrors()
     } else {
       travelersInput.className = 'success'
     }
 
     if (destValue === '') {
       destinationDropdown.className = 'failure'
-      this.setErrors()
+      this.setTripErrors()
     } else {
       destinationDropdown.className = 'success'
     }
   },
 
-  setErrors() {
+  setTripErrors() {
     tripErrorMessage.classList.remove('hidden')
     tripCost.classList.add('hidden')
     buttonSubmit.classList.add('hidden')

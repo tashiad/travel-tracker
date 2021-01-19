@@ -9,6 +9,10 @@ import Trip from './Trip.js'
 
 const welcomeText = document.querySelector('#welcome-text')
 const cardGrid = document.querySelector('.card-grid')
+const buttonSignIn = document.querySelector('#login-form-submit')
+const usernameInput = document.querySelector('#username-field')
+const passwordInput = document.querySelector('#password-field')
+const signInErrorMessage = document.querySelector("#sign-in-error-message")
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
@@ -19,25 +23,49 @@ const buttonSubmit = document.querySelector('#button-submit')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
 
-buttonQuote.addEventListener('click', evaluateForm)
+buttonSignIn.addEventListener('click', evaluateSignInForm)
+buttonQuote.addEventListener('click', evaluateTripForm)
 buttonSubmit.addEventListener('click', requestTrip)
 
 const allDestinations = []
 const allTrips = []
 let currentTraveler
 
-const fetchedTravelerData = fetchApi.getTravelerData()
+// const fetchedTravelerData = fetchApi.getTravelerData()
+// const fetchedSingleTraveler = fetchApi.getSingleTraveler(travelerId)
 const fetchedTripData = fetchApi.getTripData()
 const fetchedDestinationData = fetchApi.getDestinationData()
 
-Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
-  .then(values => {
-    generateTraveler(values[0])
-    findTravelerTrips(values[1])
-    generateTripDestinations(values[2])
-    createTripCards()
-  })
-  .catch(handleErrorMessages)
+function evaluateSignInForm(event) {
+  event.preventDefault()
+  const usernameValue = usernameInput.value.trim()
+  const passwordValue = passwordInput.value.trim()
+  const splitName = usernameValue.split('')
+  const letters = splitName.slice(0, 8).join('')
+  const numbers = splitName.slice(8, 10).join('')
+  const currentUserId = parseInt(numbers)
+
+  domUpdates.validateSignInInputs(usernameValue, letters, numbers, passwordValue)
+
+  if (usernameInput.classList.contains('success') &&
+      passwordInput.classList.contains('success')) {
+        signInErrorMessage.classList.add('hidden')
+        loadDashboard(currentUserId)
+      }
+}
+
+function loadDashboard(currentUserId) {
+  const fetchedSingleTraveler = fetchApi.getSingleTraveler(currentUserId)
+
+  Promise.all([fetchedSingleTraveler, fetchedTripData, fetchedDestinationData])
+    .then(values => {
+      generateTraveler(values[0])
+      findTravelerTrips(values[1])
+      generateTripDestinations(values[2])
+      createTripCards()
+    })
+    .catch(handleErrorMessages)
+}
 
 function handleErrorMessages(error) {
   window.alert('The server was not accessible at this time. Please reload the page or try again later.')
@@ -45,7 +73,8 @@ function handleErrorMessages(error) {
 }
 
 function generateTraveler(travelerData) {
-  currentTraveler = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)])
+  // currentTraveler = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)])
+  currentTraveler = new Traveler(travelerData)
   let firstName = currentTraveler.name.split(' ')[0]
   domUpdates.addWelcomeMessage(firstName)
 }
@@ -87,7 +116,7 @@ function findDestination() {
   })
 }
 
-function evaluateForm(event) {
+function evaluateTripForm(event) {
   event.preventDefault()
 
   domUpdates.validateInputs()
