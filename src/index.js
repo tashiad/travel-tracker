@@ -137,7 +137,7 @@ function quoteTrip() {
 
   totalEstimate = tripEstimate + (tripEstimate * .1)
 
-  domUpdates.addTripQuoteToDom(totalEstimate)
+  domUpdates.addTripQuoteToDom(totalEstimate.toFixed(2))
   domUpdates.removeTripValidation()
 }
 

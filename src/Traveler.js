@@ -45,7 +45,7 @@ class Traveler {
 
     totalSpent = tripSpend + (tripSpend * .1)
 
-    return totalSpent.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return totalSpent.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   }
 
   getDaysTraveled() {
