@@ -19,8 +19,10 @@ const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
+let cards
 
 const domUpdates = {
+
   validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
     if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined) || (numbers === "0") || (numbers === "00") || (parseInt(numbers) > 50)) {
       usernameInput.className = 'failure'
@@ -54,6 +56,7 @@ const domUpdates = {
 
   addCardToDom(trip) {
     const newTripCard = cardTemplate.content.cloneNode(true)
+    cards = document.querySelectorAll('.card')
     newTripCard.querySelector('h3.card-destination').innerText = trip.destinationDetails.name
     newTripCard.querySelector('img.card-image').src = trip.destinationDetails.image
     newTripCard.querySelector('img.card-image').alt = trip.destinationDetails.alt
@@ -64,7 +67,41 @@ const domUpdates = {
     newTripCard.querySelector('p.card-flights').innerHTML = `<strong>Flights:</strong> $${trip.destinationDetails.flights} per person`
     newTripCard.querySelector('p.card-status').innerHTML = `<strong>Status:</strong> ${trip.status}`
 
+    if (trip.status === 'pending') {
+      newTripCard.querySelector('article').classList.add('pending')
+    } else if (trip.status === 'approved') {
+      newTripCard.querySelector('article').classList.add('approved')
+    }
+
     cardGrid.appendChild(newTripCard)
+  },
+
+  showApprovedTrips() {
+    cards.forEach(card => {
+      if (card.classList.contains('pending')) {
+        card.classList.add('hidden')
+      } else if (card.classList.contains('approved')) {
+        card.classList.remove('hidden')
+      }
+    })
+  },
+
+  showPendingTrips() {
+    cards.forEach(card => {
+      if (card.classList.contains('approved')) {
+        card.classList.add('hidden')
+      } else if (card.classList.contains('pending')) {
+        card.classList.remove('hidden')
+      }
+    })
+  },
+
+  showAllTrips() {
+    cards.forEach(card => {
+      if (card.classList.contains('hidden')) {
+        card.classList.remove('hidden')
+      }
+    })
   },
 
   showStats(currentTraveler) {

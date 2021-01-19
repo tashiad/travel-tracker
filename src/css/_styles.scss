@@ -98,8 +98,7 @@ header {
 }
 
 .hidden {
-  display: none;
-  transition: $transition;
+  display: none !important;
 }
 
 .error-message {

@@ -22,10 +22,22 @@ const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
+const noTripFilters = document.querySelector('#no-trip-filters')
+const approvedTrips = document.querySelector('#approved-trips')
+const pendingTrips = document.querySelector('#pending-trips')
 
 buttonSignIn.addEventListener('click', evaluateSignInForm)
 buttonQuote.addEventListener('click', evaluateTripForm)
 buttonSubmit.addEventListener('click', requestTrip)
+noTripFilters.addEventListener('click', function() {
+  domUpdates.showAllTrips()
+})
+approvedTrips.addEventListener('click', function() {
+  domUpdates.showApprovedTrips()
+})
+pendingTrips.addEventListener('click', function() {
+  domUpdates.showPendingTrips()
+})
 
 const allDestinations = []
 const allTrips = []
