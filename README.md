@@ -1,105 +1,97 @@
-# Webpack Starter Kit
-
-## Clone This Repo
-
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
-
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
-
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
-
-## Setup
-
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
-
-Then install the library dependencies. Run:
-
-```bash
-npm install
-```
-
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text, Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
-
-## Where to Add Your Code
-
-### JavaScript
-
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
-
-**Create all of your feature code files in the `src` directory.**
-
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+# COVID'S Over Travel Tracker
 
 ---
 
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
+#### A project for when we can travel the world again.
 
 ---
 
-## Linting Your Code
+## Table of Contents
+* [Introduction](#introduction)
+* [Features](#features)
+* [Technologies](#technologies)
+* [Deployment](#deployment)
+* [Authors](#authors)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
+## Introduction
+The primary goal of this project was to create an application for a traveler to manage and track their trips via a travel agency. A user can log in to see a dashboard with their past, present, future, and pending trips and destination info, along with some stats about their travels. They can also fill out a form to send a new trip request to their travel agent. The specifications can be found [here](https://frontend.turing.io/projects/travel-tracker.html).
 
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
+## Motivation
+* Use OOP to drive the design of the application and the code
+* Work with an API to send and receive data
+* Solidify the code review process
+* Create a robust test suite that thoroughly tests all functionality of a client-side application
 
-## Webpack?
+---
 
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
+## Features
+* [Login](#Login)
+* [Filter Trips](#Filter-Trips)
+* [Plan A New Trip](#Plan-A-New-Trip)
 
-## Deploying to GitHub Pages
+<p align = "center">
+![Initial Screen](src/images/travel-tracker-desktop.png)
+</p>
 
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
+#### Login
+When the page is first opened, the user sees all of the available recipes on the page in little cards.
+<p align = "center">
+![Initial Screen](src/images/login.gif)
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      The recipes are created by using `fetch` to request recipe data and then displayed on cards that are created in the DOM.
+    </details>
 
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
+#### Filter Trips
+You'll find all of the recipes you need here, but that can be a lot to handle, so we got a search bar, baby! Just type in a recipe name or ingredient, and we'll find everything that suits your needs.  
+<p align = "center">
+![Initial Screen](src/images/filter-trips.gif)
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      When the user starts to type into the search bar, the recipes are filtered first by name and then by ingredient. The recipes that do not match the search criteria are then hidden from view.
+    </details>
 
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+#### Plan A New Trip
+Another way to narrow down your recipe selection is to use the filter feature. On the left side, select a type of recipe to display, then click "Filter Recipes", and you'll only see the recipes that fit those tags.
+<p align = "center">
+![Initial Screen](src/images/request-trip.gif)
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      When the user selects a tag and presses the button, all of the recipes whose tags do NOT include the selected tag/s are hidden from the page. When the user selects more than one tag, the recipe's tags must include ALL of the selected tags to not be hidden.
+    </details>
+
+---
+
+#### Accessibility & Responsive Design
+This app was built with all users in mind. I used Lighthouse and [WAVE](https://wave.webaim.org/) to work towards including as broad of an audience as I could. Of course, as I am committed to including all users, I am happy to make future edits to address any areas that I may have missed.
+<p align = "center">
+![Initial Screen](src/images/travel-tracker-mobile.gif)
+</p>
+
+
+#### Continuous Improvement/Future Improvements
+- Add a travel agency with their own login and dashboard of new trip requests ("pending" trips). Allow them to see their total income generated this year and travelers on trips for today's date. Allow them to approve/deny trip requests, search users by name, view a single user's info, add suggested activities, and delete an upcoming trip for the user. Allow them to create new destinations.
+- Add a countdown to their next trip on the user dashboard.
+- Implement more robust trip filtering on the current site (this feature would be especially necessary as the application scales and users add more trips)
+
+---
+
+## Technologies
+JavaScript, Fetch/Async, JSON, Mocha, Chai, HTML5, SASS, Normalize, Webpack
+
+## Deployment
+This app requires a local server to be running independent of GH. Clone down [this repo](https://github.com/turingschool-examples/travel-tracker-api) and follow the instructions in the README. Once the server is running on your local machine, the site can be seen in all of it's glory here:
+
+[Deployment Link](https://tashiad.github.io/travel-tracker/dist/index.html)
+
+## Author
+<table>
+    <tr>
+        <td> Tashia Davis <a href="https://github.com/tashiad">GH</td>
+    </tr>
+ <td><img src="https://avatars3.githubusercontent.com/u/66852774?s=400&v=4" alt="Tashia Davis GitHub"
+ width="150" height="auto" /></td>
+</table>
