@@ -18,7 +18,6 @@ const tripsTaken = document.querySelector('#trips-taken')
 const daysTraveled = document.querySelector('#days-traveled')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
-let cards
 
 const domUpdates = {
 
@@ -60,7 +59,6 @@ const domUpdates = {
 
   addCardToDom(trip) {
     const newTripCard = cardTemplate.content.cloneNode(true)
-    cards = document.querySelectorAll('.card')
     newTripCard.querySelector('h3.card-destination').innerText = trip.destinationDetails.name
     newTripCard.querySelector('img.card-image').src = trip.destinationDetails.image
     newTripCard.querySelector('img.card-image').alt = trip.destinationDetails.alt
@@ -81,6 +79,7 @@ const domUpdates = {
   },
 
   showApprovedTrips() {
+    const cards = document.querySelectorAll('.card')
     cards.forEach(card => {
       if (card.classList.contains('pending')) {
         card.classList.add('hidden')
@@ -91,6 +90,7 @@ const domUpdates = {
   },
 
   showPendingTrips() {
+    const cards = document.querySelectorAll('.card')
     cards.forEach(card => {
       if (card.classList.contains('approved')) {
         card.classList.add('hidden')
@@ -101,6 +101,7 @@ const domUpdates = {
   },
 
   showAllTrips() {
+    const cards = document.querySelectorAll('.card')
     cards.forEach(card => {
       if (card.classList.contains('hidden')) {
         card.classList.remove('hidden')
