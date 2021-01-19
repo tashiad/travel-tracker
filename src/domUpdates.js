@@ -14,6 +14,7 @@ const destinationDropdown = document.querySelector('#trip-destination')
 const tripCost = document.querySelector('#trip-cost')
 const buttonSubmit = document.querySelector('#button-submit')
 const totalSpent = document.querySelector('#total-spent')
+const totalSpentMessage = document.querySelector('#total-spent-message')
 const tripsTaken = document.querySelector('#trips-taken')
 const daysTraveled = document.querySelector('#days-traveled')
 const tripErrorMessage = document.querySelector('#trip-error-message')
@@ -109,9 +110,15 @@ const domUpdates = {
   },
 
   showStats(currentTraveler) {
-    totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
     tripsTaken.innerText = `${currentTraveler.getCurrentYearApprovedTrips().length}`
     daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
+    totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
+
+    if (currentTraveler.getCurrentYearSpend() === '0.00') {
+      totalSpentMessage.innerText = 'Total spent on trips so far this year. Time to book a new trip!'
+    } else {
+      totalSpentMessage.innerText = `Total spent on trips so far this year. You're quite the traveler!`
+    }
   },
 
   validateTripInputs() {
