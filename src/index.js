@@ -9,41 +9,69 @@ import Trip from './Trip.js'
 
 const welcomeText = document.querySelector('#welcome-text')
 const cardGrid = document.querySelector('.card-grid')
+const buttonSignIn = document.querySelector('#login-form-submit')
+const usernameInput = document.querySelector('#username-field')
+const passwordInput = document.querySelector('#password-field')
+const signInErrorMessage = document.querySelector("#sign-in-error-message")
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
+const tripCost = document.querySelector('#trip-cost')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
+const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
 
-buttonQuote.addEventListener('click', quoteTrip)
+buttonSignIn.addEventListener('click', evaluateSignInForm)
+buttonQuote.addEventListener('click', evaluateTripForm)
 buttonSubmit.addEventListener('click', requestTrip)
 
 const allDestinations = []
 const allTrips = []
 let currentTraveler
 
-const fetchedTravelerData = fetchApi.getTravelerData()
 const fetchedTripData = fetchApi.getTripData()
 const fetchedDestinationData = fetchApi.getDestinationData()
 
-Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
-  .then(values => {
-    generateTraveler(values[0])
-    findTravelerTrips(values[1])
-    generateTripDestinations(values[2])
-    createTripCards()
-  })
-  .catch(handleErrorMessages)
+function evaluateSignInForm(event) {
+  event.preventDefault()
+  const usernameValue = usernameInput.value.trim()
+  const passwordValue = passwordInput.value.trim()
+  const splitName = usernameValue.split('')
+  const letters = splitName.slice(0, 8).join('')
+  const numbers = splitName.slice(8, 10).join('')
+  const currentUserId = parseInt(numbers)
+
+  domUpdates.validateSignInInputs(usernameValue, letters, numbers, passwordValue)
+
+  if (usernameInput.classList.contains('success') &&
+      passwordInput.classList.contains('success')) {
+        signInErrorMessage.classList.add('hidden')
+        loadDashboard(currentUserId)
+      }
+}
+
+function loadDashboard(currentUserId) {
+  const fetchedSingleTraveler = fetchApi.getSingleTraveler(currentUserId)
+
+  Promise.all([fetchedSingleTraveler, fetchedTripData, fetchedDestinationData])
+    .then(values => {
+      generateTraveler(values[0])
+      findTravelerTrips(values[1])
+      generateTripDestinations(values[2])
+      createTripCards()
+    })
+    .catch(handleErrorMessages)
+}
 
 function handleErrorMessages(error) {
-  // window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
   console.log(error)
 }
 
 function generateTraveler(travelerData) {
-  currentTraveler = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)])
+  currentTraveler = new Traveler(travelerData)
   let firstName = currentTraveler.name.split(' ')[0]
   domUpdates.addWelcomeMessage(firstName)
 }
@@ -57,7 +85,7 @@ function findTravelerTrips(tripData) {
 }
 
 function generateTripDestinations(destinationData) {
-  alphabetizeDestinations(destinationData) // SHOULD PROBABLY COME FROM GLOBAL INSTEAD
+  alphabetizeDestinations(destinationData)
   destinationData.destinations.forEach(location => {
     let newDestination = new Destination(location)
     allDestinations.push(newDestination)
@@ -68,7 +96,7 @@ function generateTripDestinations(destinationData) {
 }
 
 function alphabetizeDestinations(destinationData) {
-  destinationData.destinations.sort((a, b) => { // CHANGE ARRAY TO GLOBAL
+  destinationData.destinations.sort((a, b) => {
     return a.destination.localeCompare(b.destination)
   })
 }
@@ -85,6 +113,20 @@ function findDestination() {
   })
 }
 
+function evaluateTripForm(event) {
+  event.preventDefault()
+
+  domUpdates.validateTripInputs()
+
+  if (dateInput.classList.contains('success') &&
+      durationInput.classList.contains('success') &&
+      travelersInput.classList.contains('success') &&
+      destinationDropdown.classList.contains('success')) {
+        quoteTrip()
+        tripErrorMessage.classList.add('hidden')
+      }
+}
+
 function quoteTrip() {
   let tripEstimate = 0
   let totalEstimate = 0
@@ -98,21 +140,16 @@ function quoteTrip() {
   domUpdates.addTripQuoteToDom(totalEstimate)
 }
 
-function createNewTripId() {
-  const lastId = allTrips[allTrips.length - 1].id // MAKE SURE THIS UPDATES W/ EACH POST TO AVOID DUPLICATES. SORT FIRST?
-  const newId = lastId + 1
-  return newId
-}
-
 function formatDate(dateValue) {
   return dateValue.replace(/-/g, '/')
 }
 
-function requestTrip() {
+function requestTrip(event) {
+  event.preventDefault()
   const matchingDest = findDestination()
 
   const tripRequest = {
-    id: createNewTripId(),
+    id: Date.now(),
     userID: currentTraveler.id,
     destinationID: matchingDest.id,
     travelers: parseInt(travelersInput.value),
