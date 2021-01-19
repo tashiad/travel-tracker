@@ -13,11 +13,13 @@ const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
+const tripCost = document.querySelector('#trip-cost')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
+const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
 
-buttonQuote.addEventListener('click', quoteTrip)
+buttonQuote.addEventListener('click', checkInputs)
 buttonSubmit.addEventListener('click', requestTrip)
 
 const allDestinations = []
@@ -38,7 +40,7 @@ Promise.all([fetchedTravelerData, fetchedTripData, fetchedDestinationData])
   .catch(handleErrorMessages)
 
 function handleErrorMessages(error) {
-  // window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
   console.log(error)
 }
 
@@ -85,6 +87,62 @@ function findDestination() {
   })
 }
 
+function checkInputs(event) {
+  event.preventDefault()
+
+  const dateValue = dateInput.value.trim()
+  const durationValue = durationInput.value.trim()
+  const travelersValue = travelersInput.value.trim()
+  const destValue = destinationDropdown.value.trim()
+
+  const currentDate = new Date();
+  const inputDate = new Date(dateValue);
+
+  if ((dateValue === '') || (inputDate < currentDate)) {
+    dateInput.className = 'failure'
+    tripErrorMessage.classList.remove('hidden')
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
+  } else {
+    dateInput.className = 'success'
+  }
+
+  if ((durationValue === '') || (durationValue === '0')) {
+    durationInput.className = 'failure'
+    tripErrorMessage.classList.remove('hidden')
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
+  } else {
+    durationInput.className = 'success'
+  }
+
+  if ((travelersValue === '') || (travelersValue === '0')) {
+    travelersInput.className = 'failure'
+    tripErrorMessage.classList.remove('hidden')
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
+  } else {
+    travelersInput.className = 'success'
+  }
+
+  if (destValue === '') {
+    destinationDropdown.className = 'failure'
+    tripErrorMessage.classList.remove('hidden')
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
+  } else {
+    destinationDropdown.className = 'success'
+  }
+
+  if (dateInput.classList.contains('success') &&
+      durationInput.classList.contains('success') &&
+      travelersInput.classList.contains('success') &&
+      destinationDropdown.classList.contains('success')) {
+        quoteTrip()
+        tripErrorMessage.classList.add('hidden')
+      }
+}
+
 function quoteTrip() {
   let tripEstimate = 0
   let totalEstimate = 0
@@ -102,7 +160,8 @@ function formatDate(dateValue) {
   return dateValue.replace(/-/g, '/')
 }
 
-function requestTrip() {
+function requestTrip(event) {
+  event.preventDefault()
   const matchingDest = findDestination()
 
   const tripRequest = {

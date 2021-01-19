@@ -40,6 +40,10 @@ const domUpdates = {
     cardGrid.appendChild(newTripCard)
   },
 
+  checkInputs() {
+    // if
+  },
+
   addTripQuoteToDom(costEstimate) {
     const formattedCost = costEstimate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     tripCost.classList.remove('hidden')

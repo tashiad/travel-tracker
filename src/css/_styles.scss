@@ -13,7 +13,8 @@ header {
     color: white;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     color: white;
   }
 }
@@ -99,6 +100,19 @@ header {
 .hidden {
   display: none;
   transition: $transition;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+}
+
+.success {
+  border: 2px solid green;
+}
+
+.failure {
+  border: 2px solid red;
 }
 
 @media screen and (max-width: 1400px) {

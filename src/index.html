@@ -30,9 +30,9 @@
         <label for="trip-start">Start Date:</label>
         <input type="date" id="trip-start" name="trip-start" required>
         <label for="trip-duration">Number of Days:</label>
-        <input type="number" id="trip-duration" name="trip-duration" min="1" required>
+        <input type="number" id="trip-duration" name="trip-duration" minlength="1" min="1" required>
         <label for="trip-travelers">Number of Travelers:</label>
-        <input type="number" id="trip-travelers" name="trip-travelers" min="1" required>
+        <input type="number" id="trip-travelers" name="trip-travelers" minlength="1" min="1" required>
         <label for="trip-destination">Destination:</label>
         <select id="trip-destination" name="trip-destination" required>
           <option value="" disabled selected></option>
@@ -40,6 +40,7 @@
         <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
         <p class="hidden" id="trip-cost"></p>
         <button class="button button-submit hidden" id="button-submit" type="button" name="button">Request Trip</button>
+        <p class="error-message hidden" id="trip-error-message">Be sure to fill out all fields above and check to make sure the date is in the future before submitting.</p>
         <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
       </form>
       <aside class="trip-stats">
