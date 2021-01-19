@@ -1,3 +1,6 @@
+const sidebar = document.querySelector('.sidebar')
+const allTrips = document.querySelector('.all-trips')
+const signInForm = document.querySelector('.sign-in-form')
 const welcomeText = document.querySelector('#welcome-text')
 const buttonSignIn = document.querySelector('#login-form-submit')
 const usernameInput = document.querySelector('#username-field')
@@ -32,6 +35,10 @@ const domUpdates = {
   },
 
   addWelcomeMessage(firstName) {
+    welcomeText.classList.remove('hidden')
+    sidebar.classList.remove('hidden')
+    allTrips.classList.remove('hidden')
+    signInForm.classList.add('hidden')
     welcomeText.innerText = `Welcome, ${firstName}!`
   },
 

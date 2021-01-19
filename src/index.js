@@ -31,8 +31,6 @@ const allDestinations = []
 const allTrips = []
 let currentTraveler
 
-// const fetchedTravelerData = fetchApi.getTravelerData()
-// const fetchedSingleTraveler = fetchApi.getSingleTraveler(travelerId)
 const fetchedTripData = fetchApi.getTripData()
 const fetchedDestinationData = fetchApi.getDestinationData()
 
@@ -73,7 +71,6 @@ function handleErrorMessages(error) {
 }
 
 function generateTraveler(travelerData) {
-  // currentTraveler = new Traveler(travelerData.travelers[Math.floor(Math.random() * travelerData.travelers.length)])
   currentTraveler = new Traveler(travelerData)
   let firstName = currentTraveler.name.split(' ')[0]
   domUpdates.addWelcomeMessage(firstName)
@@ -119,7 +116,7 @@ function findDestination() {
 function evaluateTripForm(event) {
   event.preventDefault()
 
-  domUpdates.validateInputs()
+  domUpdates.validateTripInputs()
 
   if (dateInput.classList.contains('success') &&
       durationInput.classList.contains('success') &&
