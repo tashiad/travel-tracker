@@ -52,7 +52,8 @@ function evaluateSignInForm(event) {
   const numbers = splitName.slice(8, 10).join('')
   const currentUserId = parseInt(numbers)
 
-  domUpdates.validateSignInInputs(usernameValue, letters, numbers, passwordValue)
+  domUpdates.validateUsername(letters, numbers)
+  domUpdates.validatePassword(passwordValue)
 
   if (usernameInput.classList.contains('success') &&
     passwordInput.classList.contains('success')) {

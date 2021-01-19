@@ -22,7 +22,7 @@ const requestMessage = document.querySelector('#trip-request-message')
 
 const domUpdates = {
 
-  validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
+  validateUsername(letters, numbers) {
     if ((letters !== 'traveler') ||
       (numbers === undefined) ||
       (numbers === '0') ||
@@ -33,7 +33,9 @@ const domUpdates = {
     } else {
       usernameInput.className = 'success'
     }
+  },
 
+  validatePassword(passwordValue) {
     if (passwordValue !== 'travel2020') {
       passwordInput.className = 'failure'
       signInErrorMessage.innerText = `Username or password does not match.`
