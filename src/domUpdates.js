@@ -22,21 +22,20 @@ const requestMessage = document.querySelector('#trip-request-message')
 const domUpdates = {
 
   validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
-    if ((usernameValue === '') ||
-      (letters !== 'traveler') ||
+    if ((letters !== 'traveler') ||
       (numbers === undefined) ||
       (numbers === '0') ||
       (numbers === '00') ||
       (parseInt(numbers) > 50)) {
       usernameInput.className = 'failure'
-      signInErrorMessage.classList.remove('hidden')
+      signInErrorMessage.innerText = `Username or password does not match.`
     } else {
       usernameInput.className = 'success'
     }
 
     if (passwordValue !== 'travel2020') {
       passwordInput.className = 'failure'
-      signInErrorMessage.classList.remove('hidden')
+      signInErrorMessage.innerText = `Username or password does not match.`
     } else {
       passwordInput.className = 'success'
     }
@@ -111,7 +110,7 @@ const domUpdates = {
 
   showStats(currentTraveler) {
     totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
-    tripsTaken.innerText = `${currentTraveler.getApprovedTrips().length}`
+    tripsTaken.innerText = `${currentTraveler.getCurrentYearApprovedTrips().length}`
     daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
   },
 
@@ -154,7 +153,7 @@ const domUpdates = {
   },
 
   setTripErrors() {
-    tripErrorMessage.classList.remove('hidden')
+    tripErrorMessage.innerText = 'Be sure to fill out all fields above and check to make sure the date is in the future before submitting.'
     tripCost.classList.add('hidden')
     buttonSubmit.classList.add('hidden')
   },
