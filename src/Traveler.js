@@ -25,8 +25,11 @@ class Traveler {
   }
 
   getApprovedTrips2021() {
+    const today = Date.now()
+    const currentYear = new Date(today).getFullYear()
+
     return this.trips.filter(trip => {
-      return trip.date.includes('2021') && trip.status === 'approved' // NEED TO TEST THAT THIS IS WORKING
+      return trip.date.includes(currentYear) && trip.status === 'approved'
     })
   }
 
