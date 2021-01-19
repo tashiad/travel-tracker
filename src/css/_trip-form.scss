@@ -20,11 +20,6 @@ input,
   font-size: 1em;
   font-weight: bold;
   color: white;
-
-  &:hover {
-    background-color: $light-gray;
-    transition: $transition;
-  }
 }
 
 .button-submit {

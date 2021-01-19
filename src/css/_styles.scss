@@ -1,28 +1,31 @@
 header {
   grid-column: 1 / 4;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
+  background-size: cover;
+  background-position: center;
   height: 150px;
   padding: 0 2%;
 
-  .fa-plane {
-    color: white;
-  }
-
   h1,
-  h2 {
+  h2,
+  .fa-plane {
     color: white;
   }
 }
 
 .button {
-  margin: 8% 0;
   height: 40px;
+  margin: 8% 0;
+  padding: 0 3%;
   cursor: pointer;
+
+  &:hover {
+    background-color: $light-gray;
+    transition: $transition;
+  }
 }
 
 .button-filter {
@@ -31,13 +34,10 @@ header {
 }
 
 #no-trip-filters {
+  @extend .button;
   background-color: $blue;
   color: white;
-
-  &:hover {
-    background-color: $light-gray;
-    transition: $transition;
-  }
+  margin: 2% 0 5% 0;
 }
 
 .sign-in-container {
@@ -56,7 +56,6 @@ header {
     border-radius: 2px;
     box-shadow: none;
     margin: 1%;
-    padding-left: 1%;
   }
 
   .button-signin {
@@ -64,6 +63,7 @@ header {
     color: $dark-gray;
     background-color: white;
     height: 32px;
+    cursor: pointer;
 
     &:hover {
       color: $blue;
