@@ -11,7 +11,7 @@
 * [Features](#features)
 * [Technologies](#technologies)
 * [Deployment](#deployment)
-* [Authors](#authors)
+* [Author](#author)
 
 ## Introduction
 The primary goal of this project was to create an application for a traveler to manage and track their trips via a travel agency. A user can log in to see a dashboard with their past, present, future, and pending trips and destination info, along with some stats about their travels. They can also fill out a form to send a new trip request to their travel agent. The specifications can be found [here](https://frontend.turing.io/projects/travel-tracker.html).
