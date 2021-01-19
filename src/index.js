@@ -30,10 +30,10 @@ noTripFilters.addEventListener('click', function() {
   domUpdates.showAllTrips()
 })
 approvedTrips.addEventListener('click', function() {
-  domUpdates.showApprovedTrips()
+  domUpdates.filterTripsInDom('pending', 'approved')
 })
 pendingTrips.addEventListener('click', function() {
-  domUpdates.showPendingTrips()
+  domUpdates.filterTripsInDom('approved', 'pending')
 })
 
 const allDestinations = []

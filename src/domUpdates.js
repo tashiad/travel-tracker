@@ -80,23 +80,12 @@ const domUpdates = {
     cardGrid.appendChild(newTripCard)
   },
 
-  showApprovedTrips() {
+  filterTripsInDom(class1, class2) {
     const cards = document.querySelectorAll('.card')
     cards.forEach(card => {
-      if (card.classList.contains('pending')) {
+      if (card.classList.contains(class1)) {
         card.classList.add('hidden')
-      } else if (card.classList.contains('approved')) {
-        card.classList.remove('hidden')
-      }
-    })
-  },
-
-  showPendingTrips() {
-    const cards = document.querySelectorAll('.card')
-    cards.forEach(card => {
-      if (card.classList.contains('approved')) {
-        card.classList.add('hidden')
-      } else if (card.classList.contains('pending')) {
+      } else if (card.classList.contains(class2)) {
         card.classList.remove('hidden')
       }
     })
