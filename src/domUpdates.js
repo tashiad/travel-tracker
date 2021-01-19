@@ -8,6 +8,7 @@ const tripCost = document.querySelector('#trip-cost')
 const buttonSubmit = document.querySelector('#button-submit')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
+const tripErrorMessage = document.querySelector('#trip-error-message')
 
 const domUpdates = {
   addWelcomeMessage(firstName) {
@@ -40,8 +41,48 @@ const domUpdates = {
     cardGrid.appendChild(newTripCard)
   },
 
-  checkInputs() {
-    // if
+  validateInputs() {
+    const dateValue = dateInput.value.trim()
+    const durationValue = durationInput.value.trim()
+    const travelersValue = travelersInput.value.trim()
+    const destValue = destinationDropdown.value.trim()
+
+    const currentDate = new Date();
+    const inputDate = new Date(dateValue);
+
+    if ((dateValue === '') || (inputDate < currentDate)) {
+      dateInput.className = 'failure'
+      this.setErrors()
+    } else {
+      dateInput.className = 'success'
+    }
+
+    if ((durationValue === '') || (durationValue === '0')) {
+      durationInput.className = 'failure'
+      this.setErrors()
+    } else {
+      durationInput.className = 'success'
+    }
+
+    if ((travelersValue === '') || (travelersValue === '0')) {
+      travelersInput.className = 'failure'
+      this.setErrors()
+    } else {
+      travelersInput.className = 'success'
+    }
+
+    if (destValue === '') {
+      destinationDropdown.className = 'failure'
+      this.setErrors()
+    } else {
+      destinationDropdown.className = 'success'
+    }
+  },
+
+  setErrors() {
+    tripErrorMessage.classList.remove('hidden')
+    tripCost.classList.add('hidden')
+    buttonSubmit.classList.add('hidden')
   },
 
   addTripQuoteToDom(costEstimate) {

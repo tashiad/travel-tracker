@@ -19,7 +19,7 @@ const buttonSubmit = document.querySelector('#button-submit')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
 
-buttonQuote.addEventListener('click', checkInputs)
+buttonQuote.addEventListener('click', evaluateForm)
 buttonSubmit.addEventListener('click', requestTrip)
 
 const allDestinations = []
@@ -87,52 +87,10 @@ function findDestination() {
   })
 }
 
-function checkInputs(event) {
+function evaluateForm(event) {
   event.preventDefault()
 
-  const dateValue = dateInput.value.trim()
-  const durationValue = durationInput.value.trim()
-  const travelersValue = travelersInput.value.trim()
-  const destValue = destinationDropdown.value.trim()
-
-  const currentDate = new Date();
-  const inputDate = new Date(dateValue);
-
-  if ((dateValue === '') || (inputDate < currentDate)) {
-    dateInput.className = 'failure'
-    tripErrorMessage.classList.remove('hidden')
-    tripCost.classList.add('hidden')
-    buttonSubmit.classList.add('hidden')
-  } else {
-    dateInput.className = 'success'
-  }
-
-  if ((durationValue === '') || (durationValue === '0')) {
-    durationInput.className = 'failure'
-    tripErrorMessage.classList.remove('hidden')
-    tripCost.classList.add('hidden')
-    buttonSubmit.classList.add('hidden')
-  } else {
-    durationInput.className = 'success'
-  }
-
-  if ((travelersValue === '') || (travelersValue === '0')) {
-    travelersInput.className = 'failure'
-    tripErrorMessage.classList.remove('hidden')
-    tripCost.classList.add('hidden')
-    buttonSubmit.classList.add('hidden')
-  } else {
-    travelersInput.className = 'success'
-  }
-
-  if (destValue === '') {
-    destinationDropdown.className = 'failure'
-    tripErrorMessage.classList.remove('hidden')
-    tripCost.classList.add('hidden')
-    buttonSubmit.classList.add('hidden')
-  } else {
-    destinationDropdown.className = 'success'
-  }
+  domUpdates.validateInputs()
 
   if (dateInput.classList.contains('success') &&
       durationInput.classList.contains('success') &&
