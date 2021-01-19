@@ -12,7 +12,7 @@ describe('Trip', function() {
   beforeEach(function() {
     trip1Info = tripData[0]
     trip1 = new Trip(trip1Info)
-    trip2Info = tripData[1]
+    trip2Info = tripData[2]
     trip2 = new Trip(trip2Info)
   })
 

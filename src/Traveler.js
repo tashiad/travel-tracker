@@ -6,10 +6,6 @@ class Traveler {
     this.trips = []
   }
 
-  formatCost(number) {
-    return number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
-
   addMatchingTrips(newTrip) {
     if ((newTrip.userId === this.id) && (!this.trips.includes(newTrip.id))) {
       this.trips.push(newTrip)
@@ -24,11 +20,11 @@ class Traveler {
     })
   }
 
-  getApprovedTrips() {
-    return this.trips.filter(trip => trip.status === 'approved')
+  formatCost(number) {
+    return number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
 
-  getApprovedTrips2021() {
+  getCurrentYearApprovedTrips() {
     const today = Date.now()
     const currentYear = new Date(today).getFullYear()
 
@@ -40,7 +36,7 @@ class Traveler {
   getCurrentYearSpend() {
     let tripSpend = 0
     let totalSpent = 0
-    const tripsThisYear = this.getApprovedTrips2021()
+    const tripsThisYear = this.getCurrentYearApprovedTrips()
 
     tripsThisYear.forEach(trip => {
       tripSpend += trip.duration * trip.destinationDetails.lodging
@@ -53,7 +49,7 @@ class Traveler {
   }
 
   getDaysTraveled() {
-    const approved = this.getApprovedTrips()
+    const approved = this.trips.filter(trip => trip.status === 'approved')
     const totalDays = approved.reduce((total, trip) => {
       total += trip.duration
       return total

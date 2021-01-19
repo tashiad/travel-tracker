@@ -62,7 +62,7 @@ describe('Traveler', function() {
     findTravelerTrips(traveler1)
     findTravelerTrips(traveler2)
 
-    expect(traveler1.trips).to.deep.equal([{
+    expect(traveler1.trips[0]).to.deep.equal({
       "id": 117,
       "userId": 1,
       "destinationId": 28,
@@ -71,7 +71,7 @@ describe('Traveler', function() {
       "duration": 15,
       "status": "approved",
       "suggestedActivities": []
-    }])
+    })
     expect(traveler2.trips[0]).to.deep.equal({
       "id": 89,
       "userId": 2,
@@ -91,7 +91,7 @@ describe('Traveler', function() {
     matchTripDestinations(traveler1)
     matchTripDestinations(traveler2)
 
-    expect(traveler1.trips).to.deep.equal([{
+    expect(traveler1.trips[0]).to.deep.equal({
       "id": 117,
       "userId": 1,
       "destinationId": 28,
@@ -108,7 +108,7 @@ describe('Traveler', function() {
         "image": "https://images.unsplash.com/photo-1580237541049-2d715a09486e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2090&q=80",
         "alt": "white and brown concrete buildings near sea under white clouds during daytime"
       }
-    }])
+    })
     expect(traveler2.trips[0]).to.deep.equal({
       "id": 89,
       "userId": 2,
@@ -129,11 +129,16 @@ describe('Traveler', function() {
     })
   })
 
-  it('should filter trips by current year (2021)', function() {
+  it('should format costs to 2 decimals with a comma for the thousands', function() {
+    expect(traveler1.formatCost(12)).to.eq('12.00')
+    expect(traveler2.formatCost(14356)).to.eq('14,356.00')
+  })
+
+  it('should filter trips by current year and approved', function() {
     findTravelerTrips(traveler1)
     findTravelerTrips(traveler2)
 
-    expect(traveler1.getTripsThisYear()).to.deep.equal([{
+    expect(traveler1.getCurrentYearApprovedTrips()).to.deep.equal([{
       "id": 117,
       "userId": 1,
       "destinationId": 28,
@@ -143,7 +148,7 @@ describe('Traveler', function() {
       "status": "approved",
       "suggestedActivities": []
     }])
-    expect(traveler2.getTripsThisYear()).to.deep.equal([])
+    expect(traveler2.getCurrentYearApprovedTrips()).to.deep.equal([])
   })
 
   it('should calculate total spent for a trip in 2021, including 10% agent fee', function() {
@@ -153,10 +158,18 @@ describe('Traveler', function() {
     matchTripDestinations(traveler1)
     matchTripDestinations(traveler2)
 
-    traveler1.getTripsThisYear()
-    traveler2.getTripsThisYear()
+    expect(traveler1.getCurrentYearSpend()).to.eq('4,125.00')
+    expect(traveler2.getCurrentYearSpend()).to.eq('0.00')
+  })
 
-    expect(traveler1.calculateTotalSpent()).to.eq('4,125')
-    expect(traveler2.calculateTotalSpent()).to.eq('0')
+  it('should calculate the total number of days traveled', function() {
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
+
+    matchTripDestinations(traveler1)
+    matchTripDestinations(traveler2)
+
+    expect(traveler1.getDaysTraveled()).to.eq(15)
+    expect(traveler2.getDaysTraveled()).to.eq(45)
   })
 })
