@@ -6,6 +6,10 @@ class Traveler {
     this.trips = []
   }
 
+  formatCost(number) {
+    return number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
+
   addMatchingTrips(newTrip) {
     if ((newTrip.userId === this.id) && (!this.trips.includes(newTrip.id))) {
       this.trips.push(newTrip)
@@ -29,11 +33,11 @@ class Traveler {
     const currentYear = new Date(today).getFullYear()
 
     return this.trips.filter(trip => {
-      return trip.date.includes(currentYear) && trip.status === 'approved'
+      return trip.date.includes(currentYear) && (trip.status === 'approved')
     })
   }
 
-  calculate2021Spend() {
+  getCurrentYearSpend() {
     let tripSpend = 0
     let totalSpent = 0
     const tripsThisYear = this.getApprovedTrips2021()
@@ -45,7 +49,7 @@ class Traveler {
 
     totalSpent = tripSpend + (tripSpend * .1)
 
-    return totalSpent.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return this.formatCost(totalSpent)
   }
 
   getDaysTraveled() {

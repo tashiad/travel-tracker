@@ -15,7 +15,7 @@ const fetchApi = {
   },
 
   getDestinationData() {
-    return fetch('http://localhost:3001/api/v1/destinations	')
+    return fetch('http://localhost:3001/api/v1/destinations')
       .then(response => response.json())
   },
 

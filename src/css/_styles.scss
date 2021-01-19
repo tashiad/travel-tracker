@@ -19,6 +19,27 @@ header {
   }
 }
 
+.button {
+  margin: 8% 0;
+  height: 40px;
+  cursor: pointer;
+}
+
+.button-filter {
+  @extend .button-quote;
+  margin: 2% 0 5% 0;
+}
+
+#no-trip-filters {
+  background-color: $blue;
+  color: white;
+
+  &:hover {
+    background-color: $light-gray;
+    transition: $transition;
+  }
+}
+
 .sign-in-form {
   display: flex;
   justify-content: flex-end;
@@ -98,8 +119,7 @@ header {
 }
 
 .hidden {
-  display: none;
-  transition: $transition;
+  display: none !important;
 }
 
 .error-message {
@@ -183,5 +203,11 @@ header {
     .button-signin {
       height: 30px;
     }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .button-filter {
+    margin: 2% 0 2% 0;
   }
 }

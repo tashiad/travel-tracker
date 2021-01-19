@@ -7,25 +7,34 @@ import Traveler from './Traveler.js'
 import Destination from './Destination.js'
 import Trip from './Trip.js'
 
-const welcomeText = document.querySelector('#welcome-text')
-const cardGrid = document.querySelector('.card-grid')
-const buttonSignIn = document.querySelector('#login-form-submit')
 const usernameInput = document.querySelector('#username-field')
 const passwordInput = document.querySelector('#password-field')
-const signInErrorMessage = document.querySelector("#sign-in-error-message")
+const buttonSignIn = document.querySelector('#login-form-submit')
+const signInErrorMessage = document.querySelector('#sign-in-error-message')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
-const tripCost = document.querySelector('#trip-cost')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
+const noTripFilters = document.querySelector('#no-trip-filters')
+const approvedTrips = document.querySelector('#approved-trips')
+const pendingTrips = document.querySelector('#pending-trips')
 
 buttonSignIn.addEventListener('click', evaluateSignInForm)
 buttonQuote.addEventListener('click', evaluateTripForm)
 buttonSubmit.addEventListener('click', requestTrip)
+noTripFilters.addEventListener('click', function() {
+  domUpdates.showAllTrips()
+})
+approvedTrips.addEventListener('click', function() {
+  domUpdates.showApprovedTrips()
+})
+pendingTrips.addEventListener('click', function() {
+  domUpdates.showPendingTrips()
+})
 
 const allDestinations = []
 const allTrips = []
@@ -46,10 +55,10 @@ function evaluateSignInForm(event) {
   domUpdates.validateSignInInputs(usernameValue, letters, numbers, passwordValue)
 
   if (usernameInput.classList.contains('success') &&
-      passwordInput.classList.contains('success')) {
-        signInErrorMessage.classList.add('hidden')
-        loadDashboard(currentUserId)
-      }
+    passwordInput.classList.contains('success')) {
+    signInErrorMessage.classList.add('hidden')
+    loadDashboard(currentUserId)
+  }
 }
 
 function loadDashboard(currentUserId) {
@@ -66,7 +75,7 @@ function loadDashboard(currentUserId) {
 }
 
 function handleErrorMessages(error) {
-  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  window.alert('Something went wrong. Please refresh the page or try again later.')
   console.log(error)
 }
 
@@ -101,14 +110,14 @@ function alphabetizeDestinations(destinationData) {
   })
 }
 
-function alphabetizeTrips() {
-  currentTraveler.trips.sort((a, b) => {
-    return a.destinationDetails.name.localeCompare(b.destinationDetails.name)
+function sortTripsByDate() {
+  return currentTraveler.trips.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date)
   })
 }
 
 function createTripCards() {
-  alphabetizeTrips()
+  sortTripsByDate()
   currentTraveler.trips.forEach(trip => {
     domUpdates.addCardToDom(trip)
   })
@@ -126,12 +135,12 @@ function evaluateTripForm(event) {
   domUpdates.validateTripInputs()
 
   if (dateInput.classList.contains('success') &&
-      durationInput.classList.contains('success') &&
-      travelersInput.classList.contains('success') &&
-      destinationDropdown.classList.contains('success')) {
-        quoteTrip()
-        tripErrorMessage.classList.add('hidden')
-      }
+    durationInput.classList.contains('success') &&
+    travelersInput.classList.contains('success') &&
+    destinationDropdown.classList.contains('success')) {
+    quoteTrip()
+    tripErrorMessage.classList.add('hidden')
+  }
 }
 
 function quoteTrip() {
@@ -142,9 +151,9 @@ function quoteTrip() {
   tripEstimate += durationInput.value * matchingDest.lodging
   tripEstimate += travelersInput.value * matchingDest.flights
 
-  totalEstimate = tripEstimate + (tripEstimate * .1)
+  totalEstimate = currentTraveler.formatCost(tripEstimate + (tripEstimate * .1))
 
-  domUpdates.addTripQuoteToDom(totalEstimate.toFixed(2))
+  domUpdates.addTripQuoteToDom(totalEstimate)
   domUpdates.removeTripValidation()
 }
 
@@ -168,7 +177,7 @@ function requestTrip(event) {
   }
 
   fetchApi.postTripRequest(tripRequest)
-    .then(responses => {
+    .then(() => {
       const newTrip = new Trip(tripRequest)
       currentTraveler.trips.push(newTrip)
       currentTraveler.addMatchingDestinations(matchingDest)
