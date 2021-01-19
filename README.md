@@ -33,7 +33,8 @@ The primary goal of this project was to create an application for a traveler to 
 #### Login
 On load, the user sees a login form. Credentials are username: `traveler50` (or any number at the end between 1-50) and password: `travel2020`
 <p align = "center">
-![login](https://user-images.githubusercontent.com/66852774/105107979-7e81ab00-5a76-11eb-8922-187b51cca44c.gif)
+<img src="https://media.giphy.com/media/94qT4z80QExCPprrmX/giphy.gif">
+<!-- ![login](https://user-images.githubusercontent.com/66852774/105107979-7e81ab00-5a76-11eb-8922-187b51cca44c.gif) -->
 </p>
     <details>
       <summary>Under the Hood</summary>
