@@ -18,10 +18,11 @@ const buttonSubmit = document.querySelector('#button-submit')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 const tripErrorMessage = document.querySelector('#trip-error-message')
+const requestMessage = document.querySelector('#trip-request-message')
 
 const domUpdates = {
   validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
-    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined)) {
+    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined) || (numbers === "0") || (numbers === "00") || (parseInt(numbers) > 50)) {
       usernameInput.className = 'failure'
       signInErrorMessage.classList.remove('hidden')
     } else {
@@ -116,6 +117,13 @@ const domUpdates = {
     buttonSubmit.classList.add('hidden')
   },
 
+  removeTripValidation() {
+    dateInput.classList.remove('success')
+    durationInput.classList.remove('success')
+    travelersInput.classList.remove('success')
+    destinationDropdown.classList.remove('success')
+  },
+
   addTripQuoteToDom(costEstimate) {
     const formattedCost = costEstimate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     tripCost.classList.remove('hidden')
@@ -130,6 +138,9 @@ const domUpdates = {
     durationInput.value = "";
     travelersInput.value = "";
     destinationDropdown.value = "";
+    setTimeout(function() {
+        requestMessage.classList.add('hidden')
+      }, 3000)
   },
 
   clearTripCards() {

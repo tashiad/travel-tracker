@@ -12,6 +12,7 @@
 <body>
   <header>
     <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
+    <p class="error-message hidden" id="sign-in-error-message">Username or password does not match.</p>
     <form class="sign-in-form">
       <label for="username-field" class="sign-in-label">Username</label>
       <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
@@ -19,7 +20,6 @@
       <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>
       <label for="login-form-submit" class="sign-in-label">Submit</label>
       <input type="submit" value="Sign In" id="login-form-submit" class="button-signin">
-      <p class="error-message hidden" id="sign-in-error-message">Username or password does not match.</p>
     </form>
     <h2 class="hidden" id="welcome-text"></h2>
   </header>

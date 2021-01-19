@@ -140,6 +140,7 @@ header {
   header {
     flex-direction: column;
     justify-content: flex-start;
+    height: auto;
 
     h2 {
       margin-top: 0;
@@ -152,7 +153,7 @@ header {
     width: 70%;
 
     .button-signin {
-      height: auto;
+      height: 33px;
     }
   }
 }

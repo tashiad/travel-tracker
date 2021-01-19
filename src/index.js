@@ -138,6 +138,7 @@ function quoteTrip() {
   totalEstimate = tripEstimate + (tripEstimate * .1)
 
   domUpdates.addTripQuoteToDom(totalEstimate)
+  domUpdates.removeTripValidation()
 }
 
 function formatDate(dateValue) {
