@@ -185,6 +185,12 @@ header {
   }
 }
 
+@media screen and (max-width: 610px) {
+  .trip-stats .stat {
+    font-size: 1.2em;
+  }
+}
+
 @media screen and (max-width: 570px) {
   header {
     height: 230px;
