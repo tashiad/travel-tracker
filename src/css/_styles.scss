@@ -40,10 +40,16 @@ header {
   }
 }
 
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
 .sign-in-form {
   display: flex;
   justify-content: flex-end;
-  width: 40%;
 
   input {
     border: none;
@@ -57,7 +63,7 @@ header {
     font-weight: bold;
     color: $dark-gray;
     background-color: white;
-    width: 20%;
+    height: 32px;
 
     &:hover {
       color: $blue;
@@ -148,7 +154,6 @@ header {
 @media screen and (max-width: 1200px) {
   .sign-in-form {
     flex-direction: column;
-    width: 25%;
 
     .button-signin {
       width: 50%;
@@ -160,16 +165,20 @@ header {
   header {
     flex-direction: column;
     justify-content: flex-start;
+    height: 175px;
 
     h2 {
       margin-top: 0;
     }
   }
 
+  .sign-in-container {
+    align-items: center;
+  }
+
   .sign-in-form {
     flex-direction: row;
     justify-content: center;
-    width: 70%;
 
     .button-signin {
       height: 33px;
@@ -177,9 +186,19 @@ header {
   }
 }
 
+@media screen and (max-width: 570px) {
+  header {
+    height: 230px;
+
+    h1 {
+      text-align: center;
+    }
+  }
+}
+
 @media screen and (max-width: 425px) {
   header {
-    height: auto;
+    height: 300px;
   }
 
   .sidebar {

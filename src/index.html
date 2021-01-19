@@ -12,15 +12,17 @@
 <body>
   <header>
     <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
-    <p class="error-message" id="sign-in-error-message"></p>
-    <form class="sign-in-form">
-      <label for="username-field" class="sign-in-label">Username</label>
-      <input type="text" name="username" class="login-form-field" id="username-field" placeholder="Username" required>
-      <label for="password-field" class="sign-in-label">Password</label>
-      <input type="password" name="password" class="login-form-field" id="password-field" placeholder="Password" required>
-      <label for="login-form-submit" class="sign-in-label">Submit</label>
-      <input type="submit" value="Sign In" class="button button-signin" id="login-form-submit">
-    </form>
+    <div class="sign-in-container">
+      <form class="sign-in-form">
+        <label for="username-field" class="sign-in-label">Username</label>
+        <input type="text" name="username" class="login-form-field" id="username-field" placeholder="Username" required>
+        <label for="password-field" class="sign-in-label">Password</label>
+        <input type="password" name="password" class="login-form-field" id="password-field" placeholder="Password" required>
+        <label for="login-form-submit" class="sign-in-label">Submit</label>
+        <input type="submit" value="Sign In" class="button button-signin" id="login-form-submit">
+      </form>
+      <p class="error-message" id="sign-in-error-message"></p>
+    </div>
     <h2 class="hidden" id="welcome-text"></h2>
   </header>
   <main>
