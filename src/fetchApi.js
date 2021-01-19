@@ -32,10 +32,10 @@ const fetchApi = {
 
     return fetch('http://localhost:3001/api/v1/trips', postFormat)
       .then(response => {
-          if (!response.ok) {
-            tripErrorMessage.innerText = 'Unable to request trip. Please try again later.'
-          }
-          return response.json()
+        if (!response.ok) {
+          tripErrorMessage.innerText = 'Unable to request trip. Please try again later.'
+        }
+        return response.json()
       })
   }
 }

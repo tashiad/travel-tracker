@@ -14,6 +14,7 @@ const destinationDropdown = document.querySelector('#trip-destination')
 const tripCost = document.querySelector('#trip-cost')
 const buttonSubmit = document.querySelector('#button-submit')
 const totalSpent = document.querySelector('#total-spent')
+const totalSpentMessage = document.querySelector('#total-spent-message')
 const tripsTaken = document.querySelector('#trips-taken')
 const daysTraveled = document.querySelector('#days-traveled')
 const tripErrorMessage = document.querySelector('#trip-error-message')
@@ -21,7 +22,7 @@ const requestMessage = document.querySelector('#trip-request-message')
 
 const domUpdates = {
 
-  validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
+  validateUsername(letters, numbers) {
     if ((letters !== 'traveler') ||
       (numbers === undefined) ||
       (numbers === '0') ||
@@ -32,7 +33,9 @@ const domUpdates = {
     } else {
       usernameInput.className = 'success'
     }
+  },
 
+  validatePassword(passwordValue) {
     if (passwordValue !== 'travel2020') {
       passwordInput.className = 'failure'
       signInErrorMessage.innerText = `Username or password does not match.`
@@ -77,23 +80,12 @@ const domUpdates = {
     cardGrid.appendChild(newTripCard)
   },
 
-  showApprovedTrips() {
+  filterTripsInDom(class1, class2) {
     const cards = document.querySelectorAll('.card')
     cards.forEach(card => {
-      if (card.classList.contains('pending')) {
+      if (card.classList.contains(class1)) {
         card.classList.add('hidden')
-      } else if (card.classList.contains('approved')) {
-        card.classList.remove('hidden')
-      }
-    })
-  },
-
-  showPendingTrips() {
-    const cards = document.querySelectorAll('.card')
-    cards.forEach(card => {
-      if (card.classList.contains('approved')) {
-        card.classList.add('hidden')
-      } else if (card.classList.contains('pending')) {
+      } else if (card.classList.contains(class2)) {
         card.classList.remove('hidden')
       }
     })
@@ -109,9 +101,15 @@ const domUpdates = {
   },
 
   showStats(currentTraveler) {
-    totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
     tripsTaken.innerText = `${currentTraveler.getCurrentYearApprovedTrips().length}`
     daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
+    totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
+
+    if (currentTraveler.getCurrentYearSpend() === '0.00') {
+      totalSpentMessage.innerText = 'Total spent on trips so far this year. Time to book a new trip!'
+    } else {
+      totalSpentMessage.innerText = `Total spent on trips so far this year. You're quite the traveler!`
+    }
   },
 
   validateTripInputs() {

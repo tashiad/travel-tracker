@@ -1,28 +1,31 @@
 header {
   grid-column: 1 / 4;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
-  background-size: cover;
-  background-position: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),url("../images/plane-banner.jpg");
+  background-size: cover;
+  background-position: center;
   height: 150px;
   padding: 0 2%;
 
-  .fa-plane {
-    color: white;
-  }
-
   h1,
-  h2 {
+  h2,
+  .fa-plane {
     color: white;
   }
 }
 
 .button {
-  margin: 8% 0;
   height: 40px;
+  margin: 8% 0;
+  padding: 0 3%;
   cursor: pointer;
+
+  &:hover {
+    background-color: $light-gray;
+    transition: $transition;
+  }
 }
 
 .button-filter {
@@ -31,33 +34,36 @@ header {
 }
 
 #no-trip-filters {
+  @extend .button;
   background-color: $blue;
   color: white;
+  margin: 2% 0 5% 0;
+}
 
-  &:hover {
-    background-color: $light-gray;
-    transition: $transition;
-  }
+.sign-in-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .sign-in-form {
   display: flex;
   justify-content: flex-end;
-  width: 40%;
 
   input {
     border: none;
     border-radius: 2px;
     box-shadow: none;
     margin: 1%;
-    padding-left: 1%;
   }
 
   .button-signin {
     font-weight: bold;
     color: $dark-gray;
     background-color: white;
-    width: 20%;
+    height: 32px;
+    cursor: pointer;
 
     &:hover {
       color: $blue;
@@ -90,8 +96,7 @@ header {
 }
 
 .all-trips {
-  padding-left: 3%;
-  padding-right: 6%;
+  padding: 0 6% 0 3%;
 
   h2 {
     padding-bottom: 3%;
@@ -148,7 +153,6 @@ header {
 @media screen and (max-width: 1200px) {
   .sign-in-form {
     flex-direction: column;
-    width: 25%;
 
     .button-signin {
       width: 50%;
@@ -160,16 +164,20 @@ header {
   header {
     flex-direction: column;
     justify-content: flex-start;
+    height: 175px;
 
     h2 {
       margin-top: 0;
     }
   }
 
+  .sign-in-container {
+    align-items: center;
+  }
+
   .sign-in-form {
     flex-direction: row;
     justify-content: center;
-    width: 70%;
 
     .button-signin {
       height: 33px;
@@ -177,9 +185,25 @@ header {
   }
 }
 
+@media screen and (max-width: 610px) {
+  .trip-stats .stat {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  header {
+    height: 230px;
+
+    h1 {
+      text-align: center;
+    }
+  }
+}
+
 @media screen and (max-width: 425px) {
   header {
-    height: auto;
+    height: 300px;
   }
 
   .sidebar {
@@ -202,6 +226,10 @@ header {
     .button-signin {
       height: 30px;
     }
+  }
+
+  .trip-stats {
+    margin: 3% 0;
   }
 }
 
