@@ -56,7 +56,7 @@ function evaluateSignInForm(event) {
 
   if (usernameInput.classList.contains('success') &&
     passwordInput.classList.contains('success')) {
-    signInErrorMessage.classList.add('hidden')
+    signInErrorMessage.innerText = ''
     loadDashboard(currentUserId)
   }
 }
@@ -71,11 +71,11 @@ function loadDashboard(currentUserId) {
       generateTripDestinations(values[2])
       createTripCards()
     })
-    .catch(handleErrorMessages)
+    .catch(handleServerMessages)
 }
 
-function handleErrorMessages(error) {
-  window.alert('Something went wrong. Please refresh the page or try again later.')
+function handleServerMessages(error) {
+  signInErrorMessage.innerText = `Something went wrong. Please refresh the page or try again later.`
   console.log(error)
 }
 
@@ -185,5 +185,5 @@ function requestTrip(event) {
       createTripCards()
       requestMessage.classList.remove('hidden')
       domUpdates.resetForm()
-    }).catch(handleErrorMessages)
+    }).catch(handleServerMessages)
 }
