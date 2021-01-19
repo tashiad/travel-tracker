@@ -7,6 +7,8 @@ const usernameInput = document.querySelector('#username-field')
 const passwordInput = document.querySelector('#password-field')
 const signInErrorMessage = document.querySelector("#sign-in-error-message")
 const totalSpent = document.querySelector('#total-spent')
+const tripsTaken = document.querySelector('#trips-taken')
+const daysTraveled = document.querySelector('#days-traveled')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
@@ -16,10 +18,11 @@ const buttonSubmit = document.querySelector('#button-submit')
 const cardGrid = document.querySelector('.card-grid')
 const cardTemplate = document.querySelector('.template-card')
 const tripErrorMessage = document.querySelector('#trip-error-message')
+const requestMessage = document.querySelector('#trip-request-message')
 
 const domUpdates = {
   validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
-    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined)) {
+    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined) || (numbers === "0") || (numbers === "00") || (parseInt(numbers) > 50)) {
       usernameInput.className = 'failure'
       signInErrorMessage.classList.remove('hidden')
     } else {
@@ -42,10 +45,6 @@ const domUpdates = {
     welcomeText.innerText = `Welcome, ${firstName}!`
   },
 
-  displayTotalSpent(currentTraveler) {
-    totalSpent.innerText = `$${currentTraveler.calculateTotalSpent()}`
-  },
-
   addDestinationsToDropdown(destination) {
     const newOption = document.createElement('option')
     newOption.innerText = destination.name
@@ -66,6 +65,12 @@ const domUpdates = {
     newTripCard.querySelector('p.card-status').innerHTML = `<strong>Status:</strong> ${trip.status}`
 
     cardGrid.appendChild(newTripCard)
+  },
+
+  showStats(currentTraveler) {
+    totalSpent.innerText = `$${currentTraveler.calculate2021Spend()}`
+    tripsTaken.innerText = `${currentTraveler.getApprovedTrips().length}`
+    daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
   },
 
   validateTripInputs() {
@@ -112,6 +117,13 @@ const domUpdates = {
     buttonSubmit.classList.add('hidden')
   },
 
+  removeTripValidation() {
+    dateInput.classList.remove('success')
+    durationInput.classList.remove('success')
+    travelersInput.classList.remove('success')
+    destinationDropdown.classList.remove('success')
+  },
+
   addTripQuoteToDom(costEstimate) {
     const formattedCost = costEstimate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     tripCost.classList.remove('hidden')
@@ -126,6 +138,9 @@ const domUpdates = {
     durationInput.value = "";
     travelersInput.value = "";
     destinationDropdown.value = "";
+    setTimeout(function() {
+        requestMessage.classList.add('hidden')
+      }, 3000)
   },
 
   clearTripCards() {

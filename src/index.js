@@ -92,7 +92,7 @@ function generateTripDestinations(destinationData) {
     domUpdates.addDestinationsToDropdown(newDestination)
     currentTraveler.addMatchingDestinations(newDestination)
   })
-  domUpdates.displayTotalSpent(currentTraveler)
+  domUpdates.showStats(currentTraveler)
 }
 
 function alphabetizeDestinations(destinationData) {
@@ -101,7 +101,14 @@ function alphabetizeDestinations(destinationData) {
   })
 }
 
+function alphabetizeTrips() {
+  currentTraveler.trips.sort((a, b) => {
+    return a.destinationDetails.name.localeCompare(b.destinationDetails.name)
+  })
+}
+
 function createTripCards() {
+  alphabetizeTrips()
   currentTraveler.trips.forEach(trip => {
     domUpdates.addCardToDom(trip)
   })
@@ -137,7 +144,8 @@ function quoteTrip() {
 
   totalEstimate = tripEstimate + (tripEstimate * .1)
 
-  domUpdates.addTripQuoteToDom(totalEstimate)
+  domUpdates.addTripQuoteToDom(totalEstimate.toFixed(2))
+  domUpdates.removeTripValidation()
 }
 
 function formatDate(dateValue) {
