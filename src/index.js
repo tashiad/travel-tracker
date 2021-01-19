@@ -46,10 +46,10 @@ function evaluateSignInForm(event) {
   domUpdates.validateSignInInputs(usernameValue, letters, numbers, passwordValue)
 
   if (usernameInput.classList.contains('success') &&
-      passwordInput.classList.contains('success')) {
-        signInErrorMessage.classList.add('hidden')
-        loadDashboard(currentUserId)
-      }
+    passwordInput.classList.contains('success')) {
+    signInErrorMessage.classList.add('hidden')
+    loadDashboard(currentUserId)
+  }
 }
 
 function loadDashboard(currentUserId) {
@@ -101,14 +101,14 @@ function alphabetizeDestinations(destinationData) {
   })
 }
 
-function alphabetizeTrips() {
-  currentTraveler.trips.sort((a, b) => {
-    return a.destinationDetails.name.localeCompare(b.destinationDetails.name)
+function sortTripsByDate() {
+  return currentTraveler.trips.sort((a, b) => {
+    return new Date(b.date) - new Date(a.date)
   })
 }
 
 function createTripCards() {
-  alphabetizeTrips()
+  sortTripsByDate()
   currentTraveler.trips.forEach(trip => {
     domUpdates.addCardToDom(trip)
   })
@@ -126,12 +126,12 @@ function evaluateTripForm(event) {
   domUpdates.validateTripInputs()
 
   if (dateInput.classList.contains('success') &&
-      durationInput.classList.contains('success') &&
-      travelersInput.classList.contains('success') &&
-      destinationDropdown.classList.contains('success')) {
-        quoteTrip()
-        tripErrorMessage.classList.add('hidden')
-      }
+    durationInput.classList.contains('success') &&
+    travelersInput.classList.contains('success') &&
+    destinationDropdown.classList.contains('success')) {
+    quoteTrip()
+    tripErrorMessage.classList.add('hidden')
+  }
 }
 
 function quoteTrip() {
