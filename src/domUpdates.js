@@ -153,7 +153,7 @@ const domUpdates = {
   },
 
   setTripErrors() {
-    tripErrorMessage.classList.remove('hidden')
+    tripErrorMessage.innerText = 'Be sure to fill out all fields above and check to make sure the date is in the future before submitting.'
     tripCost.classList.add('hidden')
     buttonSubmit.classList.add('hidden')
   },

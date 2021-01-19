@@ -1,3 +1,5 @@
+const tripErrorMessage = document.querySelector('#trip-error-message')
+
 const fetchApi = {
   getTravelerData() {
     return fetch('http://localhost:3001/api/v1/travelers')
@@ -22,12 +24,19 @@ const fetchApi = {
   postTripRequest(tripRequest) {
     const postFormat = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(tripRequest)
     }
 
     return fetch('http://localhost:3001/api/v1/trips', postFormat)
-      .then(response => response.json())
+      .then(response => {
+          if (!response.ok) {
+            tripErrorMessage.innerText = 'Unable to request trip. Please try again later.'
+          }
+          return response.json()
+      })
   }
 }
 

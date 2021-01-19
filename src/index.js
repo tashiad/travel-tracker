@@ -139,7 +139,7 @@ function evaluateTripForm(event) {
     travelersInput.classList.contains('success') &&
     destinationDropdown.classList.contains('success')) {
     quoteTrip()
-    tripErrorMessage.classList.add('hidden')
+    tripErrorMessage.innerText = ''
   }
 }
 
