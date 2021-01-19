@@ -1,22 +1,21 @@
-const sidebar = document.querySelector('.sidebar')
-const allTrips = document.querySelector('.all-trips')
 const signInForm = document.querySelector('.sign-in-form')
-const welcomeText = document.querySelector('#welcome-text')
-const buttonSignIn = document.querySelector('#login-form-submit')
 const usernameInput = document.querySelector('#username-field')
 const passwordInput = document.querySelector('#password-field')
-const signInErrorMessage = document.querySelector("#sign-in-error-message")
-const totalSpent = document.querySelector('#total-spent')
-const tripsTaken = document.querySelector('#trips-taken')
-const daysTraveled = document.querySelector('#days-traveled')
+const signInErrorMessage = document.querySelector('#sign-in-error-message')
+const welcomeText = document.querySelector('#welcome-text')
+const sidebar = document.querySelector('.sidebar')
+const allTrips = document.querySelector('.all-trips')
+const cardGrid = document.querySelector('.card-grid')
+const cardTemplate = document.querySelector('.template-card')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
 const tripCost = document.querySelector('#trip-cost')
 const buttonSubmit = document.querySelector('#button-submit')
-const cardGrid = document.querySelector('.card-grid')
-const cardTemplate = document.querySelector('.template-card')
+const totalSpent = document.querySelector('#total-spent')
+const tripsTaken = document.querySelector('#trips-taken')
+const daysTraveled = document.querySelector('#days-traveled')
 const tripErrorMessage = document.querySelector('#trip-error-message')
 const requestMessage = document.querySelector('#trip-request-message')
 let cards
@@ -24,7 +23,12 @@ let cards
 const domUpdates = {
 
   validateSignInInputs(usernameValue, letters, numbers, passwordValue) {
-    if ((usernameValue === '') || (letters !== 'traveler') || (numbers === undefined) || (numbers === "0") || (numbers === "00") || (parseInt(numbers) > 50)) {
+    if ((usernameValue === '') ||
+      (letters !== 'traveler') ||
+      (numbers === undefined) ||
+      (numbers === '0') ||
+      (numbers === '00') ||
+      (parseInt(numbers) > 50)) {
       usernameInput.className = 'failure'
       signInErrorMessage.classList.remove('hidden')
     } else {
@@ -105,7 +109,7 @@ const domUpdates = {
   },
 
   showStats(currentTraveler) {
-    totalSpent.innerText = `$${currentTraveler.calculate2021Spend()}`
+    totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
     tripsTaken.innerText = `${currentTraveler.getApprovedTrips().length}`
     daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
   },
@@ -116,8 +120,8 @@ const domUpdates = {
     const travelersValue = travelersInput.value.trim()
     const destValue = destinationDropdown.value.trim()
 
-    const currentDate = new Date();
-    const inputDate = new Date(dateValue);
+    const currentDate = new Date()
+    const inputDate = new Date(dateValue)
 
     if ((dateValue === '') || (inputDate < currentDate)) {
       dateInput.className = 'failure'
@@ -162,22 +166,21 @@ const domUpdates = {
   },
 
   addTripQuoteToDom(costEstimate) {
-    const formattedCost = costEstimate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     tripCost.classList.remove('hidden')
-    tripCost.innerHTML = `<strong>Estimated Trip Cost:</strong> $${formattedCost}`
+    tripCost.innerHTML = `<strong>Estimated Cost:</strong> $${costEstimate}`
     buttonSubmit.classList.remove('hidden')
   },
 
   resetForm() {
     tripCost.classList.add('hidden')
     buttonSubmit.classList.add('hidden')
-    dateInput.value = "";
-    durationInput.value = "";
-    travelersInput.value = "";
-    destinationDropdown.value = "";
+    dateInput.value = ''
+    durationInput.value = ''
+    travelersInput.value = ''
+    destinationDropdown.value = ''
     setTimeout(function() {
-        requestMessage.classList.add('hidden')
-      }, 3000)
+      requestMessage.classList.add('hidden')
+    }, 3000)
   },
 
   clearTripCards() {

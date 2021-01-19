@@ -15,32 +15,32 @@
     <p class="error-message hidden" id="sign-in-error-message">Username or password does not match.</p>
     <form class="sign-in-form">
       <label for="username-field" class="sign-in-label">Username</label>
-      <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username" required>
+      <input type="text" name="username" class="login-form-field" id="username-field" placeholder="Username" required>
       <label for="password-field" class="sign-in-label">Password</label>
-      <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password" required>
+      <input type="password" name="password" class="login-form-field" id="password-field" placeholder="Password" required>
       <label for="login-form-submit" class="sign-in-label">Submit</label>
-      <input type="submit" value="Sign In" id="login-form-submit" class="button-signin">
+      <input type="submit" value="Sign In" class="button-signin" id="login-form-submit">
     </form>
     <h2 class="hidden" id="welcome-text"></h2>
   </header>
   <main>
     <aside class="sidebar hidden">
-      <img class="icon" src="./images/undraw_travel_mode_7sf4.svg" alt="">
+      <img class="icon" src="./images/undraw_travel_mode_7sf4.svg" alt="woman traveling with a suitcase">
       <h2>Plan A New Trip</h2>
       <form class="trip-form">
         <label for="trip-start">Start Date:</label>
-        <input type="date" id="trip-start" name="trip-start" required>
+        <input type="date" name="trip-start" id="trip-start" required>
         <label for="trip-duration">Number of Days:</label>
-        <input type="number" id="trip-duration" name="trip-duration" minlength="1" min="1" required>
+        <input type="number" name="trip-duration" id="trip-duration" minlength="1" min="1" required>
         <label for="trip-travelers">Number of Travelers:</label>
-        <input type="number" id="trip-travelers" name="trip-travelers" minlength="1" min="1" required>
+        <input type="number" name="trip-travelers" id="trip-travelers" minlength="1" min="1" required>
         <label for="trip-destination">Destination:</label>
-        <select id="trip-destination" name="trip-destination" required>
+        <select name="trip-destination" id="trip-destination" required>
           <option value="" disabled selected></option>
         </select>
-        <button class="button button-quote" id="button-quote" type="button" name="button">Get a Quote</button>
+        <button type="button" name="button" class="button button-quote" id="button-quote">Get a Quote</button>
         <p class="hidden" id="trip-cost"></p>
-        <button class="button button-submit hidden" id="button-submit" type="button" name="button">Request Trip</button>
+        <button type="button" name="button" class="button button-submit hidden" id="button-submit">Request Trip</button>
         <p class="error-message hidden" id="trip-error-message">Be sure to fill out all fields above and check to make sure the date is in the future before submitting.</p>
         <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
       </form>

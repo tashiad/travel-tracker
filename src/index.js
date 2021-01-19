@@ -7,17 +7,14 @@ import Traveler from './Traveler.js'
 import Destination from './Destination.js'
 import Trip from './Trip.js'
 
-const welcomeText = document.querySelector('#welcome-text')
-const cardGrid = document.querySelector('.card-grid')
-const buttonSignIn = document.querySelector('#login-form-submit')
 const usernameInput = document.querySelector('#username-field')
 const passwordInput = document.querySelector('#password-field')
-const signInErrorMessage = document.querySelector("#sign-in-error-message")
+const buttonSignIn = document.querySelector('#login-form-submit')
+const signInErrorMessage = document.querySelector('#sign-in-error-message')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
 const destinationDropdown = document.querySelector('#trip-destination')
-const tripCost = document.querySelector('#trip-cost')
 const buttonQuote = document.querySelector('#button-quote')
 const buttonSubmit = document.querySelector('#button-submit')
 const tripErrorMessage = document.querySelector('#trip-error-message')
@@ -78,7 +75,7 @@ function loadDashboard(currentUserId) {
 }
 
 function handleErrorMessages(error) {
-  window.alert('The server was not accessible at this time. Please reload the page or try again later.')
+  window.alert('Something went wrong. Please refresh the page or try again later.')
   console.log(error)
 }
 
@@ -154,9 +151,9 @@ function quoteTrip() {
   tripEstimate += durationInput.value * matchingDest.lodging
   tripEstimate += travelersInput.value * matchingDest.flights
 
-  totalEstimate = tripEstimate + (tripEstimate * .1)
+  totalEstimate = currentTraveler.formatCost(tripEstimate + (tripEstimate * .1))
 
-  domUpdates.addTripQuoteToDom(totalEstimate.toFixed(2))
+  domUpdates.addTripQuoteToDom(totalEstimate)
   domUpdates.removeTripValidation()
 }
 
@@ -180,7 +177,7 @@ function requestTrip(event) {
   }
 
   fetchApi.postTripRequest(tripRequest)
-    .then(responses => {
+    .then(() => {
       const newTrip = new Trip(tripRequest)
       currentTraveler.trips.push(newTrip)
       currentTraveler.addMatchingDestinations(matchingDest)
