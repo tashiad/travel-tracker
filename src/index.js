@@ -101,7 +101,14 @@ function alphabetizeDestinations(destinationData) {
   })
 }
 
+function alphabetizeTrips() {
+  currentTraveler.trips.sort((a, b) => {
+    return a.destinationDetails.name.localeCompare(b.destinationDetails.name)
+  })
+}
+
 function createTripCards() {
+  alphabetizeTrips()
   currentTraveler.trips.forEach(trip => {
     domUpdates.addCardToDom(trip)
   })
