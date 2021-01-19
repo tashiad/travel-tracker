@@ -26,41 +26,48 @@ The primary goal of this project was to create an application for a traveler to 
 
 ## Features
 * [Login](#Login)
+* [User Dashboard](#User-Dashboard)
 * [Filter Trips](#Filter-Trips)
 * [Plan A New Trip](#Plan-A-New-Trip)
 
-<p align = "center">
-![Initial Screen](src/images/travel-tracker-desktop.png)
-</p>
-
 #### Login
-When the page is first opened, the user sees all of the available recipes on the page in little cards.
+On load, the user sees a login form. Credentials are username: `traveler50` (or any number at the end between 1-50) and password: `travel2020`
 <p align = "center">
 ![Initial Screen](src/images/login.gif)
 </p>
     <details>
       <summary>Under the Hood</summary>
-      The recipes are created by using `fetch` to request recipe data and then displayed on cards that are created in the DOM.
+      A single user's info is accessed by using `fetch` and interpolating their id into the endpoint. Error handling ensures that the form is filled out correctly by validating the username and password according to certain conditions.
+    </details>
+
+#### User Dashboard
+Once logged in, a user can see all their trips displayed (past, present, future, approved, and pending) and sorted by date, as well as some stats on how much they've spent on trips for the current year (helpful for budgeting), how many days they've traveled, and how many trips they've taken.
+<p align = "center">
+![Initial Screen](src/images/travel-tracker-desktop.png)
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      The user id is matched with their trips from the trips API, and then trips are matched with destination info from the destination API. All of this info is displayed on trip cards and a stats sidebar for the user to easily see.
     </details>
 
 #### Filter Trips
-You'll find all of the recipes you need here, but that can be a lot to handle, so we got a search bar, baby! Just type in a recipe name or ingredient, and we'll find everything that suits your needs.  
+While most trips have been approved by the "agent," others are still pending. The user can filter between Approved Trips, Pending Trips, and All Trips.
 <p align = "center">
 ![Initial Screen](src/images/filter-trips.gif)
 </p>
     <details>
       <summary>Under the Hood</summary>
-      When the user starts to type into the search bar, the recipes are filtered first by name and then by ingredient. The recipes that do not match the search criteria are then hidden from view.
+      Upon creation of the trip cards, classes are added to each category of trip according to their status. Trip cards are either shown or hidden in the DOM depending on which button is clicked.
     </details>
 
 #### Plan A New Trip
-Another way to narrow down your recipe selection is to use the filter feature. On the left side, select a type of recipe to display, then click "Filter Recipes", and you'll only see the recipes that fit those tags.
+Users can fill out the form in the sidebar to quote a new trip before requesting. Once requested, a new trip card is added to the dashboard with a status of 'pending'.
 <p align = "center">
 ![Initial Screen](src/images/request-trip.gif)
 </p>
     <details>
       <summary>Under the Hood</summary>
-      When the user selects a tag and presses the button, all of the recipes whose tags do NOT include the selected tag/s are hidden from the page. When the user selects more than one tag, the recipe's tags must include ALL of the selected tags to not be hidden.
+      Error handling ensures that the form is filled out correctly. That way, the POST request will have the correct format.
     </details>
 
 ---
