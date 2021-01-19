@@ -10,6 +10,16 @@ module.exports = [
     "suggestedActivities": []
   },
   {
+    "id": 220,
+    "userID": 1,
+    "destinationID": 43,
+    "travelers": 5,
+    "date": "2021/01/09",
+    "duration": 12,
+    "status": "pending",
+    "suggestedActivities": []
+  },
+  {
     "id": 89,
     "userID": 2,
     "destinationID": 10,
