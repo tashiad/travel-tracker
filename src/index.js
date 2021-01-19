@@ -92,7 +92,7 @@ function generateTripDestinations(destinationData) {
     domUpdates.addDestinationsToDropdown(newDestination)
     currentTraveler.addMatchingDestinations(newDestination)
   })
-  domUpdates.displayTotalSpent(currentTraveler)
+  domUpdates.showStats(currentTraveler)
 }
 
 function alphabetizeDestinations(destinationData) {

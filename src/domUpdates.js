@@ -7,6 +7,8 @@ const usernameInput = document.querySelector('#username-field')
 const passwordInput = document.querySelector('#password-field')
 const signInErrorMessage = document.querySelector("#sign-in-error-message")
 const totalSpent = document.querySelector('#total-spent')
+const tripsTaken = document.querySelector('#trips-taken')
+const daysTraveled = document.querySelector('#days-traveled')
 const dateInput = document.querySelector('#trip-start')
 const durationInput = document.querySelector('#trip-duration')
 const travelersInput = document.querySelector('#trip-travelers')
@@ -42,10 +44,6 @@ const domUpdates = {
     welcomeText.innerText = `Welcome, ${firstName}!`
   },
 
-  displayTotalSpent(currentTraveler) {
-    totalSpent.innerText = `$${currentTraveler.calculateTotalSpent()}`
-  },
-
   addDestinationsToDropdown(destination) {
     const newOption = document.createElement('option')
     newOption.innerText = destination.name
@@ -66,6 +64,12 @@ const domUpdates = {
     newTripCard.querySelector('p.card-status').innerHTML = `<strong>Status:</strong> ${trip.status}`
 
     cardGrid.appendChild(newTripCard)
+  },
+
+  showStats(currentTraveler) {
+    totalSpent.innerText = `$${currentTraveler.calculate2021Spend()}`
+    tripsTaken.innerText = `${currentTraveler.getApprovedTrips().length}`
+    daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
   },
 
   validateTripInputs() {
