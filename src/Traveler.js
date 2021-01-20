@@ -48,6 +48,12 @@ class Traveler {
     return this.formatCost(totalSpent)
   }
 
+  getTripsTaken() {
+    const approved = this.trips.filter(trip => trip.status === 'approved')
+
+    return approved.length
+  }
+
   getDaysTraveled() {
     const approved = this.trips.filter(trip => trip.status === 'approved')
     const totalDays = approved.reduce((total, trip) => {

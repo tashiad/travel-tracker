@@ -101,7 +101,7 @@ const domUpdates = {
   },
 
   showStats(currentTraveler) {
-    tripsTaken.innerText = `${currentTraveler.getCurrentYearApprovedTrips().length}`
+    tripsTaken.innerText = `${currentTraveler.getTripsTaken()}`
     daysTraveled.innerText = `${currentTraveler.getDaysTraveled()}`
     totalSpent.innerText = `$${currentTraveler.getCurrentYearSpend()}`
 
