@@ -1,105 +1,104 @@
-# Webpack Starter Kit
-
-## Clone This Repo
-
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
-
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
-
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
-
-## Setup
-
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
-
-Then install the library dependencies. Run:
-
-```bash
-npm install
-```
-
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text, Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
-
-## Where to Add Your Code
-
-### JavaScript
-
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
-
-**Create all of your feature code files in the `src` directory.**
-
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
-
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
-
-### HTML
-
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+# COVID'S Over Travel Tracker
 
 ---
 
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
+#### A project for when we can travel the world again.
 
 ---
 
-## Linting Your Code
+## Table of Contents
+* [Introduction](#introduction)
+* [Features](#features)
+* [Technologies](#technologies)
+* [Deployment](#deployment)
+* [Author](#author)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
+## Introduction
+The primary goal of this project was to create an application for a traveler to manage and track their trips via a travel agency. A user can log in to see a dashboard with their past, present, future, and pending trips and destination info, along with some stats about their travels. They can also fill out a form to send a new trip request to their travel agent. The specifications can be found [here](https://frontend.turing.io/projects/travel-tracker.html).
 
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
+## Motivation
+* Use OOP to drive the design of the application and the code
+* Work with an API to send and receive data
+* Solidify the code review process
+* Create a robust test suite that thoroughly tests all functionality of a client-side application
 
-## Webpack?
+---
 
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
+## Features
+* [Login](#Login)
+* [User Dashboard](#User-Dashboard)
+* [Filter Trips](#Filter-Trips)
+* [Plan A New Trip](#Plan-A-New-Trip)
 
-## Deploying to GitHub Pages
+#### Login
+On load, the user sees a login form. Credentials are username: `traveler50` (or any number at the end between 1-50) and password: `travel2020`
+<p align = "center">
+<img src="https://user-images.githubusercontent.com/66852774/105107979-7e81ab00-5a76-11eb-8922-187b51cca44c.gif">
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      A single user's info is accessed by using `fetch` and interpolating their id into the endpoint. Error handling ensures that the form is filled out correctly by validating the username and password according to certain conditions.
+    </details>
 
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
+#### User Dashboard
+Once logged in, a user can see all their trips displayed (past, present, future, approved, and pending) and sorted by date, as well as some stats on how much they've spent on trips for the current year (helpful for budgeting), how many days they've traveled, and how many trips they've taken.
+<p align = "center">
+<img src="https://user-images.githubusercontent.com/66852774/105107925-63af3680-5a76-11eb-9835-5a3459d15b7d.png">
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      The user id is matched with their trips from the trips API, and then trips are matched with destination info from the destination API. All of this info is displayed on trip cards and a stats sidebar for the user to easily see.
+    </details>
 
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
+#### Filter Trips
+While most trips have been approved by the "agent," others are still pending. The user can filter between Approved Trips, Pending Trips, and All Trips.
+<p align = "center">
+<img src="https://user-images.githubusercontent.com/66852774/105108017-95280200-5a76-11eb-87b0-b4baf61b0d42.gif">
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      Upon creation of the trip cards, classes are added to each category of trip according to their status. Trip cards are either shown or hidden in the DOM depending on which button is clicked.
+    </details>
 
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+#### Plan A New Trip
+Users can fill out the form in the sidebar to quote a new trip before requesting. Once requested, a new trip card is added to the dashboard with a status of 'pending'.
+<p align = "center">
+<img src="https://user-images.githubusercontent.com/66852774/105108206-fb148980-5a76-11eb-8c3f-dfabec7b494c.gif">
+</p>
+    <details>
+      <summary>Under the Hood</summary>
+      Error handling ensures that the form is filled out correctly. That way, the POST request will have the correct format.
+    </details>
+
+---
+
+#### Accessibility & Responsive Design
+This app was built with all users in mind. I used Lighthouse and [WAVE](https://wave.webaim.org/) to work towards including as broad of an audience as I could. Of course, as I am committed to including all users, I am happy to make future edits to address any areas that I may have missed.
+<p align = "center">
+<img src="https://user-images.githubusercontent.com/66852774/105108063-af61e000-5a76-11eb-8df0-d6f4ee1ca43f.gif">
+</p>
+
+
+#### Continuous Improvement/Future Improvements
+- Add a travel agency with their own login and dashboard of new trip requests ("pending" trips). Allow them to see their total income generated this year and travelers on trips for today's date. Allow them to approve/deny trip requests, search users by name, view a single user's info, add suggested activities, and delete an upcoming trip for the user. Allow them to create new destinations.
+- Add a countdown to their next trip on the user dashboard.
+- Implement more robust trip filtering on the current site (this feature would be especially necessary as the application scales and users add more trips)
+
+---
+
+## Technologies
+JavaScript, Fetch/Async, JSON, Mocha, Chai, HTML5, SASS, Normalize, Webpack
+
+## Deployment
+This app requires a local server to be running independent of GH. Clone down [this repo](https://github.com/turingschool-examples/travel-tracker-api) and follow the instructions in the README. Once the server is running on your local machine, the site can be seen in all of it's glory here:
+
+[Deployment Link](https://tashiad.github.io/travel-tracker/dist/index.html)
+
+## Author
+<table>
+    <tr>
+        <td> Tashia Davis <a href="https://github.com/tashiad">GH</td>
+    </tr>
+ <td><img src="https://avatars3.githubusercontent.com/u/66852774?s=400&v=4" alt="Tashia Davis GitHub"
+ width="150" height="auto" /></td>
+</table>
