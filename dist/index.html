@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>COVID's Over Travel Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/fd3b3feed2.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <h1><i class="fas fa-plane"></i> COVID's Over Travel Tracker</h1>
+    <div class="sign-in-container">
+      <form class="sign-in-form">
+        <label for="username-field" class="sign-in-label">Username</label>
+        <input type="text" name="username" class="login-form-field" id="username-field" placeholder="Username" required>
+        <label for="password-field" class="sign-in-label">Password</label>
+        <input type="password" name="password" class="login-form-field" id="password-field" placeholder="Password" required>
+        <label for="login-form-submit" class="sign-in-label">Submit</label>
+        <input type="submit" value="Sign In" class="button button-signin" id="login-form-submit">
+      </form>
+      <p class="error-message" id="sign-in-error-message"></p>
+    </div>
+    <h2 class="hidden" id="welcome-text"></h2>
+  </header>
+  <main>
+    <aside class="sidebar hidden">
+      <img class="icon" src="./images/undraw_travel_mode_7sf4.svg" alt="woman traveling with a suitcase">
+      <h2>Plan A New Trip</h2>
+      <form class="trip-form">
+        <label for="trip-start">Start Date:</label>
+        <input type="date" name="trip-start" id="trip-start" required>
+        <label for="trip-duration">Number of Days:</label>
+        <input type="number" name="trip-duration" id="trip-duration" minlength="1" min="1" required>
+        <label for="trip-travelers">Number of Travelers:</label>
+        <input type="number" name="trip-travelers" id="trip-travelers" minlength="1" min="1" required>
+        <label for="trip-destination">Destination:</label>
+        <select name="trip-destination" id="trip-destination" required>
+          <option value="" disabled selected></option>
+        </select>
+        <button type="button" name="button" class="button button-quote" id="button-quote">Get a Quote</button>
+        <p class="hidden" id="trip-cost"></p>
+        <button type="button" name="button" class="button button-submit hidden" id="button-submit">Request Trip</button>
+        <p class="error-message" id="trip-error-message"></p>
+        <p class="hidden" id="trip-request-message"><em>Your trip request has been sent. You'll hear back from your agent on whether it's been approved soon!</em></p>
+      </form>
+      <aside class="trip-stats">
+        <h3>Your Stats</h3>
+        <p class="stat" id="total-spent"></p>
+        <p id="total-spent-message"></p>
+        <p class="stat" id="trips-taken"></p>
+        <p>All time total trips taken</p>
+        <p class="stat" id="days-traveled"></p>
+        <p>All time total days traveled</p>
+      </aside>
+    </aside>
+    <section class="all-trips hidden">
+      <h2>Your Trips</h2>
+      <button type="button" name="button" class="button button-filter" id="no-trip-filters">All Trips</button>
+      <button type="button" name="button" class="button button-filter" id="approved-trips">Approved Trips</button>
+      <button type="button" name="button" class="button button-filter" id="pending-trips">Pending Trips</button>
+      <section class="card-grid">
+        <template class="template-card">
+          <article class="card">
+            <h3 class="card-destination"></h3>
+            <img class="card-image" src="source" alt="alt-text">
+            <p class="card-travelers"></p>
+            <p class="card-date"></p>
+            <p class="card-duration"></p>
+            <p class="card-lodging"></p>
+            <p class="card-flights"></p>
+            <p class="card-status"></p>
+          </article>
+        </template>
+      </section>
+    </section>
+  </main>
+<script src="main.bundle.js"></script></body>
+
+</html>
