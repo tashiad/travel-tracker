@@ -162,6 +162,17 @@ describe('Traveler', function() {
     expect(traveler2.getCurrentYearSpend()).to.eq('0.00')
   })
 
+  it('should calculate the total number of trips taken', function() {
+    findTravelerTrips(traveler1)
+    findTravelerTrips(traveler2)
+
+    matchTripDestinations(traveler1)
+    matchTripDestinations(traveler2)
+
+    expect(traveler1.getTripsTaken()).to.eq(1)
+    expect(traveler2.getTripsTaken()).to.eq(5)
+  })
+
   it('should calculate the total number of days traveled', function() {
     findTravelerTrips(traveler1)
     findTravelerTrips(traveler2)
